@@ -6,63 +6,62 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:49:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/26 13:54:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:25:02 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-typedef struct s_var
+int	startofstr(char const *s1, char const *set)
 {
-	int	i;
+	int	istr;
 	int	iset;
 	int	start;
-	int	len;
-}				t_var;
 
-void	setcheck1(char const *s1, char const *set, t_var *var)
-{
-	while (s1[var->i] != '\0' && !(var->i > (var->start + 1)))
+	start = 0;
+	istr = 0;
+	while (s1[istr] != '\0')
 	{
-		var->iset = 0;
-		while (set[var->iset] != '\0')
+		iset = 0;
+		while (s1[istr] != set[iset] && set[iset] != '\0')
+			iset++;
+		if (s1[istr] == set[iset])
+			istr++;
+		else
 		{
-			if ((int)s1[var->i] == (int)set[var->iset])
-				var->start = var->i;
-			var->iset++;
+			start = istr;
+			break ;
 		}
-		var->i++;
 	}
-}
-
-void	setcheck2(char const *s1, char const *set, t_var *var)
-{
-	while (var->i > var->start && !(var->i < (var->len - 1)))
-	{
-		var->iset = 0;
-		while (set[var->iset] != '\0')
-		{
-			if ((int)s1[var->i] == (int)set[var->iset])
-				var->len = var->i;
-			var->iset++;
-		}
-		var->i--;
-	}
+	return (start);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	t_var	var;
+	int	iset;
+	int	start;
+	int	len;
 
-	if (set == NULL || s1 == NULL)
-		return ((char *)s1);
-	var.i = 0;
-	var.start = 0;
-	setcheck1(s1, set, &var);
-	if (var.start > 0)
-		var.start += 1;
-	var.i = ft_strlen(s1);
-	var.len = var.i;
-	setcheck2(s1, set, &var);
-	return (ft_substr(s1, var.start, (var.len - var.start)));
+	if ((char *)s1 == NULL || (char *)set == NULL)
+		return (NULL);
+	start = startofstr(s1, set);
+	len = (ft_strlen(s1) - 1);
+	while (len > start)
+	{
+		iset = 0;
+		while (s1[len] != set[iset] && set[iset] != '\0')
+			iset++;
+		if (s1[len] == set[iset] && set[iset] != '\0')
+			len--;
+		else
+			break ;
+	}
+	if (start == 0 && len == 0)
+		return (ft_substr(s1, start, (len - start)));
+	return (ft_substr(s1, start, (len - start + 1)));
 }
+
+/*int	main()
+{
+	printf("%s\n", ft_strtrim("   xxx   xxx", " x"));
+}*/
