@@ -1,0 +1,185 @@
+Setup de Virtual Box : https://www.imore.com/how-use-linux-your-mac-using-virtual-machine
+
+File Location : Goinfre pour l'espace et taille choisie : 10Go
+
+Note : 
+
+VDI : Oracle's Default Disk Format. Majoritatirement present sur VirtualBox
+VHD : Virtual DIsk Format Used by Microsoft
+VMDK : VMWare's Virtual Disk Format
+-----------------------------------------------------------------------------------------
+
+Sudo :
+
+Commande pour temporairement eleve le niveau du user a admin
+Apres une utilisation les droits admin sont disponible pendant 15min
+Prerequis : User avec sudo ou root privilege
+
+Debian :
+Donner les droits : usermod -aG sudo [username]
+
+Modern Linux :
+sudo visudo / edit #User privilege specification
+
+Connaitre le user actuel :
+whoami
+
+Changer de user :
+sudo -u [different_username] whoami
+
+Changer pour root user :
+sudo bash
+
+-----------------------------------------------------------------------------------------
+
+Advanced Packaging Tool
+
+Gestionnaire de paquets utilise par Debian
+
+APT simplifie l'installation la mise a jour et la desinstallation de logiciels
+
+Il existe desormais une commande apt qui reunit les fonctions apt-get et apt-cache
+aptitude est un autre logiciel utilisant la bibliotheque APT
+
+Aptitude est une interface a APT Il offre une interface utilisateur graphique
+
+-----------------------------------------------------------------------------------------
+
+Partition : 
+
+https://wiki.debian.org/LVM
+
+Volume Physique : This means the hard disk, hard disk partitions, RAID or LUNs from a SAN which form "Physical Volumes"
+Volume Group : Collection of one or more Physical Volumes
+Logical Volumes : They sit inside a Volume Group and form a virtual partition
+Physical Extents : In order to manipulate the actual data, it is divided into blocks of data
+Logical Extents : Similar to Physical Extents but at the Logical Volume level
+
+Encrypted LVM
+Encrypted LVM protect your data in case of loss and theft.
+If you encrypt your LVM it is suggested to create backup passwords for the recovery.
+In the event that your password is not working, you risk permanently losing all your data
+
+Backup password :
+
+cryptsetup luksChangeKey <device> -S <slot>
+<device> : path to your encrypted LVM Volume ex : /dev/sda
+-S means you edit a specific key-slot you need to change <slot> for a number ranging from 0 to 7
+
+LVM : Logical Volume Manager for the Linux operating system
+Installation : sudo apt install lvm2
+Pour avoir une interface graphique : sudo apt install system-config-lvm
+
+Creer un Volume Physique :
+sudo pvcreate /dev/sda2
+
+Supprimer un Volume Physique :
+D'abord move les data : pvmove /dev/sda2
+Supprimer le Volume Physique du Volume Group : sudo vgreduce myVirtualGroup1 /dev/sda2
+Then : sudo pvremove /dev/sda2
+
+Creer un Volume Group
+sudo vgcreate myVirtualGroup1 /dev/sda2
+
+Etendre un Volume Group
+Declarer un autre Volume Physique : sudo pvcreate /dev/sda3
+Ajouter le Volume Physique au Volume Group : sudo vgextend myVirtualGroup1 /dev/sda3
+
+Renommer un Volume Group :
+Checker man car grosse operation
+
+Verifier la config Volume Group
+sudo vgdisplay
+
+----------------------------------------------------------------------------------------
+
+OpenSSH
+
+Verfier si SSH est installe :
+apt-cache policy openssh-server
+
+Installer SSH :
+apt-get update
+apt-get install openssh-server
+
+Checker si le serveur est actif :
+systemctl status ssshd
+
+Demarrer le serveur :
+systemctl start sshd
+
+Stopper le service :
+systemctl stop sshd
+
+Redemarrer le service :
+systemctl restart sshd
+
+Par defaut le service ssh ecoute sur le port 22
+Pour verifier ceci :
+ss -lntp | grep "22"
+
+Observer les ssh ouvert :
+apt-cache show openssh-client
+apt-cache show openssh-server
+
+Locate sshd_config :
+find / -name "sshd_config" 2>/dev/null
+
+Edit the file and set Port option :
+sudo vi /etc/ssh/sshd_config
+Locate line 
+Port 22
+Modify it
+Port 2222
+
+Update the firewall
+sudo ufw allow 2222/tcp
+
+Restart the service
+sudo systemctl restart ssh
+
+---------------------------------------------------------------------------------------------------
+
+Change the hostname
+
+Display the current hostname debian
+hostnamectl
+
+Change the system hostname :
+sudo hostnamectl set-hostname {name-here}
+
+Next edit the file /etc/hosts
+vi /etc/hosts
+
+Find references to oldname replace it except localhost
+
+Verify the changes
+hstnamectl
+
+------------------------------------------------------------------------------------------------------
+
+Monitoring.sh
+
+Architecture : uname -a
+Processeur Physique : getconf _NPROCESSORS_ONLN
+Processeur Virtuel : cat /proc/cpuinfo | grep 'cpu cores' | awk '{print $4}'
+Memoire vive utilise : free -m | grep Mem | awk '{print $3}'
+Memoire vive libre : free -m | grep Mem | awk '{print $4}'
+Pourcentage d'utilisation : free -m | grep Mem | awk '{printf "%.2f\n", $3/$4*100}'
+Used Disk Space : df -h --output=used --total | awk 'END {print $1}'
+Total Disk Space : df -h --output=size --total | awk 'END {print $1}'
+Pourcentage d'utilisation : df -h --output=size,used --total | awk 'END {printf "%.2f\n", $2/$1*100}'
+CPU Load percentage : mpstat | awk 'END {print $5}'
+Last boot date : who -b | awk '{print $3}'
+Last boot time : who -b | awk 'print $4}'
+Check if LVM is running : set variable = lsblk --output type | awk 'END {print $1}'
+if [$variable = "lvm"]
+	then
+	echo "yes"
+	else
+	echo "no"
+Check the number of established connection : netstat -ant | grep ESTABLISHED | wc -l
+Check the number of user using the server : who | wc -l
+Find the ip adresses of the server : hostname -I
+Find the mac address of the server : ip link show | grep ether | awk '{print $2}'
+Check the number of sudo execution : sudo cat /var/log/sudo/sudo.log | grep '.log' | wc -l
