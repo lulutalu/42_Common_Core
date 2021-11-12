@@ -1,0 +1,35 @@
+Creer un nouveau user
+sudo adduser 'name'
+
+Changer de user
+sudo -u 'name' -s
+
+Ajouter User dans group
+usermod -aG 'groupname' 'username'
+
+Verifier les user dans group
+getent group 'groupname'
+
+Ajouter username dans sudoers
+visudo
+
+Change the hostname
+sudo nano /etc/hostname
+
+sudo nano /etc/hosts
+
+sudo reboot
+
+Check password policy
+sudo nano /etc/pam.d/common-password
+sudo nano /etc/login.defs or sudo chage -* 'days' 'username'
+sudo visudo ------> flag passwd_tries et badpass_message
+
+Dans les fichiers texte les regles sont presentes
+
+---------------------------------------------------
+
+Pour les settings sudo 
+sudo visudo
+
+Differents flags
