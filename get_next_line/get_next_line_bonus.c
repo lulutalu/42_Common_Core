@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 16:04:32 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/19 12:28:06 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/11/19 12:08:00 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/11/19 12:29:25 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*line_return(char **str, int i)
 {
@@ -74,14 +74,14 @@ char	*read_loop(int fd, char **str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[4096];
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!str)
+	if (!str[fd])
 	{
-		str = malloc(1 * sizeof(char));
-		ft_bzero(str, 1 * sizeof(char));
+		str[fd] = malloc(1 * sizeof(char));
+		ft_bzero(str[fd], 1 * sizeof(char));
 	}
-	return (read_loop(fd, &str));
+	return (read_loop(fd, &str[fd]));
 }

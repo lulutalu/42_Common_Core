@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 15:58:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/19 12:27:44 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/11/19 12:09:15 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/11/19 12:29:40 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
