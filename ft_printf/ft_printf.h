@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 17:16:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/23 13:31:39 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/11/23 16:06:52 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/11/23 16:10:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
+# include "ft_printf.h"
+# include "./Libft/libft.h"
+# include <stdarg.h>
 
-	i = 0;
-	while (s[i] != (char)c && s[i] != '\0')
-		i++;
-	if (s[i] == (char)c)
-		return ((char *) s + i);
-	else
-		return (NULL);
-}
+int	ft_printf(const char *input, ...);
 
-/*int	main()
-{
-	char s[] = "tripouille";
-
-	printf("Value Fonction C = %s\n", strchr(s, 't' + 256));
-	printf("Value Fonction Mano = %s\n", ft_strchr(s, 't' + 256));
-}*/
+#endif
