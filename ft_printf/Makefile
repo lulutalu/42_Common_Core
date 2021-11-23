@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 13:38:21 by lduboulo          #+#    #+#              #
-#    Updated: 2021/11/23 19:58:50 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/11/23 20:40:16 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
+	@rm -f libft.a
 	@$(MAKE) -C $(LIBFTPATH) fclean
 	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).a files $(GREY)====================================$(RESET)"
 

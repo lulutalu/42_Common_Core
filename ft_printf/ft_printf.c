@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/23 20:36:55 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:39:47 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_printf(const char *input, ...)
 	int		i;
 	va_list arg;
 	char	*str;
-	int		res;
 
 	va_start(arg, input);
 	i = 0;
