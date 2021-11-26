@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 13:38:21 by lduboulo          #+#    #+#              #
-#    Updated: 2021/11/23 20:40:16 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/11/26 01:44:44 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,9 +59,17 @@ fclean : clean
 re : fclean all
 
 test: tclean all
-	@$(CC) main.c -o test $(NAME)
+	@$(CC) ft_printf.c -o test $(NAME)
 	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(NAME) Test exe ./test to try it out $(GREY)===================================$(RESET)"
 
 tclean: fclean
 	@rm -f test
 	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET) Test exe $(GREY)====================================$(RESET)"
+
+debog: dclean all
+	@$(CC) -g -fsanitize=address ft_printf.c -o test $(NAME)
+	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET) Test debog file $(GREY)====================================$(RESET)"
+
+dclean: fclean tclean
+	@rm -rf test.dSYM
+	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET) Test debog file $(GREY)====================================$(RESET)"
