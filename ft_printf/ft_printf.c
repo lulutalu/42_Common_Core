@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/25 19:23:13 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/26 01:59:32 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,20 @@ int	ft_printf(const char *input, ...)
 		if (input[i] == 'c')
 		{
 			ft_putchar_fd(va_arg(arg, int), 1);
-			str = ft_substr(input, i + 1, ft_strlen(str) - (i + 1));
-			ft_putstr_fd(str, 1);
-			free(str);
-			return (1);
 		}
 		if (input[i] == 's')
 		{
 			str = ft_strdup(va_arg(arg, char *));
 			ft_putstr_fd(str, 1);
 			free(str);
-			str = ft_substr(input, i + 1, ft_strlen(str) - (i + 1));
-			ft_putstr_fd(str, 1);
-			free(str);
-			return (1);
 		}
 		if (input[i] == 'p')
 		{
-		}
+			/*str = ft_strdup(&(va_arg(arg, char **)));
+			ft_putstr_fd(&str, 1);
+			free(str);*/
 			return (1);
+		}
 		if (input[i] == 'd')
 			return (1);
 		if (input[i] == 'i')
@@ -61,11 +56,32 @@ int	ft_printf(const char *input, ...)
 			return (1);
 		if (input[i] == '%')
 			return (1);
+		if (input[i + 1] != '\0')
+		{
+			str = ft_substr(input, i + 1, ft_strlen(str) - (i + 1));
+			ft_putstr_fd(str, 1);
+			free(str);
+			return (1);
+		}
+		else
+			return (1);
 	}
-	else
+	if (input[i + 1] != '\0')
 	{
-		ft_putstr_fd((char *)input, 1);
+		str = ft_substr(input, i + 1, ft_strlen(str) - (i + 1));
+		ft_putstr_fd(str, 1);
+		free(str);
 		return (1);
 	}
+	else
+		return (1);
 	return (0);
+}
+
+int	main()
+{
+	char	*test = "Test";
+
+	printf("Test %p", &test);
+	//ft_printf("Ceci est un %s ", "test");
 }
