@@ -6,13 +6,13 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:14:36 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/28 15:31:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:28:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(long n, int fd)
 {
 	char			cnbr;
 	char			minus;

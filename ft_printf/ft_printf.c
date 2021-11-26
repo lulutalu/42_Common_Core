@@ -6,21 +6,44 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/11/23 21:00:06 by lduboulo         ###   ########.fr       */
-=======
-/*   Updated: 2021/11/26 01:59:32 by lduboulo         ###   ########.fr       */
->>>>>>> 923f750934fd3f3c7800cb6c7780d98a3a5df453
+/*   Updated: 2021/11/26 14:28:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	ft_puthex_fd(long n, int fd)
+{
+	char			cnbr;
+	unsigned int	nbr;
+	char			minus;
+
+	minus = '-';
+	if (n < 0)
+	{
+		write(fd, &minus, 1);
+		nbr = n * -1;
+	}
+	else
+		nbr = n;
+	if (nbr >= 10)
+	{
+		ft_puthex_fd(nbr / 16, fd);
+		ft_puthex_fd(nbr % 16, fd);
+	}
+	if (nbr < 10)
+	{
+		cnbr = '0' + nbr;
+		write(fd, &cnbr, 1);
+	}
+}
+
 int	ft_printf(const char *input, ...)
 {
-	int		i;
-	va_list arg;
-	char	*str;
+	int				i;
+	va_list 		arg;
+	char			*str;
+	unsigned int	res;
 
 	va_start(arg, input);
 	i = 0;
@@ -49,13 +72,26 @@ int	ft_printf(const char *input, ...)
 			return (1);
 		}
 		if (input[i] == 'd')
+		{
+			ft_putnbr_fd(va_arg(arg, int), 1);
 			return (1);
+		}
 		if (input[i] == 'i')
+		{
+			ft_putnbr_fd(va_arg(arg, int), 1);
 			return (1);
+		}
 		if (input[i] == 'u')
+		{
+			res = va_arg(arg, int);
+			ft_putnbr_fd(res, 1);
 			return (1);
+		}
 		if (input[i] == 'x')
+		{
+			ft_puthex_fd(va_arg(arg, int), 1);
 			return (1);
+		}
 		if (input[i] == 'X')
 			return (1);
 		if (input[i] == '%')
@@ -84,8 +120,9 @@ int	ft_printf(const char *input, ...)
 
 int	main()
 {
-	char	*test = "Test";
+	//char	*test = "Test";
+	int	i = 800;
 
-	printf("Test %p", &test);
-	//ft_printf("Ceci est un %s ", "test");
+	printf("Fonction C = %x\n", i);
+	ft_printf("Fonction mano = %x\n", i);
 }
