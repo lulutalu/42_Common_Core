@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 18:09:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/23 20:36:58 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:51:54 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	main()
 {
-	ft_printf("Test : %c", 'c');
+	printf("Test fonction src : %p\n", "test");
+	//ft_printf("Test : %c", 'c');
 }
