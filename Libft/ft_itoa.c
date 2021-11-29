@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:58:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/10/27 19:10:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:46:54 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,50 +33,26 @@ int	nbrlen(int n, int minus)
 	return (len);
 }
 
-char	*memalloc(int n, int minus)
+char	*fillerstr(int minus, char **res, int n)
 {
-	int		len;
-	char	*res;
+	int		ires;
 
-	len = 0;
-	if (n < 10)
-	{
-		res = ft_calloc((2 + minus), sizeof(char));
-		if (res == NULL)
-			return (NULL);
-	}
-	else
-	{
-		while (n >= 10)
-		{
-			n /= 10;
-			len++;
-		}
-		res = ft_calloc((len + minus + 2), sizeof(char));
-		if (res == NULL)
-			return (NULL);
-	}
-	return (res);
-}
-
-char	*fillerstr(int ires, int minus, char *res, int n)
-{
+	ires = nbrlen(n, minus);
 	while (ires >= (0 + minus))
 	{
-		res[ires] = '0' + n % 10;
+		(*res)[ires] = '0' + n % 10;
 		n /= 10;
 		ires--;
 	}
 	if (minus == 1)
-		res[ires] = '-';
-	return (res);
+		(*res)[ires] = '-';
+	return (*res);
 }
 
 char	*ft_itoa(int n)
 {
 	char	*res;
 	int		minus;
-	int		ires;
 
 	minus = 0;
 	if (n == -2147483648)
@@ -86,11 +62,10 @@ char	*ft_itoa(int n)
 		minus = 1;
 		n *= -1;
 	}
-	res = memalloc(n, minus);
+	res = ft_calloc((nbrlen(n, minus) + 2), sizeof(char));
 	if (res == NULL)
 		return (NULL);
-	ires = nbrlen(n, minus);
-	return (fillerstr(ires, minus, res, n));
+	return (fillerstr(minus, &res, n));
 }
 
 /*int	main()
