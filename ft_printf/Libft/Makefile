@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 12:50:51 by lduboulo          #+#    #+#              #
-#    Updated: 2021/11/23 15:58:53 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/11/29 16:06:55 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRC = ft_atoi.c \
 	  ft_putchar_fd.c \
 	  ft_putstr_fd.c \
 	  ft_putendl_fd.c \
-	  ft_putnbr_fd.c
+	  ft_putnbr_fd.c \
+	  ft_itoa_base.c
 
 SRCBONUS = ft_lstnew.c \
 		   ft_lstadd_front.c \

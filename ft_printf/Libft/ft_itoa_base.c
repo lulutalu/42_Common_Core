@@ -6,69 +6,82 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:58:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/29 15:54:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/29 19:18:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//nbrlen voluntarily send the number of the last value inside the string
+// Itoa base only works for base different than 10
+// For base 10 use the regular Itoa
 
-int	nbrlen(int n, int minus)
+int	nbrlen(unsigned int n, unsigned int tbase)
 {
 	int	len;
 
-	if (n < 10)
-		len = minus;
+	if (n < tbase)
+		len = 1;
 	else
 	{
 		len = 0;
-		while (n >= 10)
+		while (n >= tbase)
 		{
-			n /= 10;
+			n /= tbase;
 			len++;
 		}
-		len += minus;
 	}
 	return (len);
 }
 
-char	*fillerstr(int minus, char **res, int n)
+void	*fillerstr(char **res, unsigned int n, int tbase)
 {
 	int		ires;
 
-	ires = nbrlen(n, minus);
-	while (ires >= (0 + minus))
+	ires = nbrlen(n, tbase);
+	while (ires >= 0)
 	{
-		(*res)[ires] = '0' + n % 10;
-		n /= 10;
+		(*res)[ires] = '0' + n % tbase;
+		n /= tbase;
 		ires--;
 	}
-	if (minus == 1)
-		(*res)[ires] = '-';
-	return (*res);
+	return (NULL);
 }
 
-char	*ft_itoa(int n)
+void	*check_base(char **res, char const *base)
+{
+	int	ires;
+	int	ibase;
+
+	ires = 0;
+	while ((*res)[ires])
+	{
+		if ((*res)[ires] <= '9')
+			ires++;
+		else
+		{
+			ibase = ((*res)[ires] - '9') + 9;
+			(*res)[ires] = base[ibase];
+			ires++;
+		}
+	}
+	return (NULL);
+}
+
+char	*ft_itoa_base(unsigned int n, char const *base)
 {
 	char	*res;
-	int		minus;
+	int		tbase;
 
-	minus = 0;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
-	{
-		minus = 1;
-		n *= -1;
-	}
-	res = ft_calloc((nbrlen(n, minus) + 2), sizeof(char));
+	tbase = ft_strlen(base);
+	res = ft_calloc((nbrlen(n, tbase) + 2), sizeof(char));
 	if (res == NULL)
 		return (NULL);
-	return (fillerstr(minus, &res, n));
+	fillerstr(&res, n, tbase);
+	check_base(&res, base);
+	return (res);
 }
 
 /*int	main()
 {
-	printf("%s\n", ft_itoa(100));
+	printf("%s\n", ft_itoa_base(-5, "0123456789abcdef"));
 }*/

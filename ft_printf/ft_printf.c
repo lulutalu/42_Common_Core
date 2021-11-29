@@ -6,37 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/26 14:28:20 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/11/29 21:41:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_puthex_fd(long n, int fd)
-{
-	char			cnbr;
-	unsigned int	nbr;
-	char			minus;
-
-	minus = '-';
-	if (n < 0)
-	{
-		write(fd, &minus, 1);
-		nbr = n * -1;
-	}
-	else
-		nbr = n;
-	if (nbr >= 10)
-	{
-		ft_puthex_fd(nbr / 16, fd);
-		ft_puthex_fd(nbr % 16, fd);
-	}
-	if (nbr < 10)
-	{
-		cnbr = '0' + nbr;
-		write(fd, &cnbr, 1);
-	}
-}
 
 int	ft_printf(const char *input, ...)
 {
@@ -89,13 +63,19 @@ int	ft_printf(const char *input, ...)
 		}
 		if (input[i] == 'x')
 		{
-			ft_puthex_fd(va_arg(arg, int), 1);
+			ft_putstr_fd(ft_itoa_base(va_arg(arg, int), "0123456789abcdef"), 1);
 			return (1);
 		}
 		if (input[i] == 'X')
+		{
+			ft_putstr_fd(ft_itoa_base(va_arg(arg, int), "0123456789ABCDEF"), 1);
 			return (1);
+		}
 		if (input[i] == '%')
+		{
+			ft_putchar_fd('%', 1);
 			return (1);
+		}
 		if (input[i + 1] != '\0')
 		{
 			str = ft_substr(input, i + 1, ft_strlen(str) - (i + 1));
@@ -121,8 +101,8 @@ int	ft_printf(const char *input, ...)
 int	main()
 {
 	//char	*test = "Test";
-	int	i = 800;
+	int	i = 985743;
 
-	printf("Fonction C = %x\n", i);
-	ft_printf("Fonction mano = %x\n", i);
+	printf("Fonction C = %%\n");
+	ft_printf("Fonction mano = %d ouais \n", i);
 }
