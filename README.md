@@ -13,3 +13,5 @@ Libft  [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/l
 Born2beroot [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/Born2beroot)](https://github.com/JaeSeoKim/badge42)
 
 Get_next_line [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/get_next_line)](https://github.com/JaeSeoKim/badge42)
+
+Ft_Printf [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/ft_printf)](https://github.com/JaeSeoKim/badge42)
