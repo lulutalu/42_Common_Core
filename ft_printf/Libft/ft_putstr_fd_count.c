@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 18:09:55 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/26 12:23:00 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/28 14:39:00 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/12/01 22:41:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	main()
+int	ft_putstr_fd_count(char *s, int fd)
 {
-	//ft_printf("Test : %c", 'c');
-	ft_printf("Test : %s ça s'arrete pas", "Test");
+	int	idx;
+
+	idx = 0;
+	if (s == NULL)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
+	else
+	{
+		while (s[idx] != '\0')
+		{
+			write(fd, s + idx, 1);
+			idx++;
+		}
+		return (idx);
+	}
 }

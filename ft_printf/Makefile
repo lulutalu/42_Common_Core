@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 13:38:21 by lduboulo          #+#    #+#              #
-#    Updated: 2021/11/28 20:51:38 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/12/03 17:05:44 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,13 @@ CFLAGS = -Wall -Werror -Wextra
 LIB = ar rcs
 
 SRC = ft_printf.c \
-
+	  ./utils/if_forest.c \
+	  ./utils/struct_init.c \
+	  ./utils/variable_counter.c \
+	  ./utils/pointer_address_process.c \
+	  ./utils/string_process.c \
+	  ./utils/hexa_process.c \
+	  ./utils/core_process.c \
 
 OBJ = $(SRC:.c=.o)
 

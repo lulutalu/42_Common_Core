@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pointer_address_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/24 22:19:41 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/01 22:33:39 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/12/03 16:38:41 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/12/03 16:54:28 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../ft_printf.h"
 
-char	*ft_strdup(const char *s1)
+void	pointer_address_process(t_printf *ptr)
 {
-	char	*copy;
-	int		icopy;
-	int		istr;
+	char	*base;
 
-	if (s1 == NULL)
-		return (NULL);
-	icopy = 0;
-	istr = 0;
-	copy = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (! copy)
-		return (NULL);
-	while (s1[istr] != '\0')
-		copy[icopy++] = s1[istr++];
-	copy[icopy] = '\0';
-	return (copy);
+	base = "0123456789abcdef";
+	ptr->count += ft_putstr_fd_count("0x", 1);
+	ft_itoa_base(&ptr->str, (unsigned long)va_arg(ptr->arg, void *), base);
+	ptr->count += ft_putstr_fd_count(ptr->str, 1);
+	free(ptr->str);
 }

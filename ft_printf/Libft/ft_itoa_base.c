@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:58:47 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/29 19:18:08 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:38:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 // Itoa base only works for base different than 10
 // For base 10 use the regular Itoa
 
-int	nbrlen(unsigned int n, unsigned int tbase)
+int	nbrlen(unsigned long n, unsigned int tbase)
 {
 	int	len;
 
+	len = 0;
 	if (n < tbase)
-		len = 1;
+		len = 0;
 	else
 	{
-		len = 0;
 		while (n >= tbase)
 		{
 			n /= tbase;
@@ -33,7 +33,7 @@ int	nbrlen(unsigned int n, unsigned int tbase)
 	return (len);
 }
 
-void	*fillerstr(char **res, unsigned int n, int tbase)
+void	*fillerstr(char **res, unsigned long n, int tbase)
 {
 	int		ires;
 
@@ -67,21 +67,22 @@ void	*check_base(char **res, char const *base)
 	return (NULL);
 }
 
-char	*ft_itoa_base(unsigned int n, char const *base)
+void	*ft_itoa_base(char **res, unsigned long n, char const *base)
 {
-	char	*res;
 	int		tbase;
 
 	tbase = ft_strlen(base);
-	res = ft_calloc((nbrlen(n, tbase) + 2), sizeof(char));
-	if (res == NULL)
+	*res = ft_calloc((nbrlen(n, tbase) + 2), sizeof(char));
+	if (*res == NULL)
 		return (NULL);
-	fillerstr(&res, n, tbase);
-	check_base(&res, base);
-	return (res);
+	fillerstr(res, n, tbase);
+	check_base(res, base);
+	return (NULL);
 }
 
 /*int	main()
 {
-	printf("%s\n", ft_itoa_base(-5, "0123456789abcdef"));
+	char	*str;
+
+	printf("%s\n", ft_itoa_base(&str, 0, "0123456789abcdef"));
 }*/
