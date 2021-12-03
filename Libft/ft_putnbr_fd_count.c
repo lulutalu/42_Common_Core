@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/24 22:19:41 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/01 22:33:39 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/28 15:14:36 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/12/01 14:04:56 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_putnbr_fd_count(long n, int fd, int *count)
 {
-	char	*copy;
-	int		icopy;
-	int		istr;
+	char			cnbr;
+	char			minus;
+	unsigned int	nbr;
 
-	if (s1 == NULL)
-		return (NULL);
-	icopy = 0;
-	istr = 0;
-	copy = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (! copy)
-		return (NULL);
-	while (s1[istr] != '\0')
-		copy[icopy++] = s1[istr++];
-	copy[icopy] = '\0';
-	return (copy);
+	minus = '-';
+	if (n < 0)
+	{
+		write(fd, &minus, 1);
+		nbr = n * -1;
+		(*count)++;
+	}
+	else
+		nbr = n;
+	if (nbr >= 10)
+	{
+		ft_putnbr_fd_count(nbr / 10, fd, count);
+		ft_putnbr_fd_count(nbr % 10, fd, count);
+	}
+	if (nbr < 10)
+	{
+		cnbr = nbr + '0';
+		write(fd, &cnbr, 1);
+		(*count)++;
+	}
 }

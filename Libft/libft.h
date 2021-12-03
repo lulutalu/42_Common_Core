@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:41:01 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/18 19:30:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:24:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+void	*ft_itoa_base(char **res, unsigned long n, char const *base);
 char	*ft_strmapi(char const *s, char (*f) (unsigned int, char));
 void	ft_striteri(char *s, void (*f) (unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd_count(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd_count(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(long n, int fd);
+void	ft_putnbr_fd_count(long n, int fd, int *count);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);

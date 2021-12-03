@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/24 22:19:41 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/01 22:33:39 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/28 14:39:00 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/12/01 22:41:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int	ft_putstr_fd_count(char *s, int fd)
 {
-	char	*copy;
-	int		icopy;
-	int		istr;
+	int	idx;
 
-	if (s1 == NULL)
-		return (NULL);
-	icopy = 0;
-	istr = 0;
-	copy = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (! copy)
-		return (NULL);
-	while (s1[istr] != '\0')
-		copy[icopy++] = s1[istr++];
-	copy[icopy] = '\0';
-	return (copy);
+	idx = 0;
+	if (s == NULL)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
+	else
+	{
+		while (s[idx] != '\0')
+		{
+			write(fd, s + idx, 1);
+			idx++;
+		}
+		return (idx);
+	}
 }
