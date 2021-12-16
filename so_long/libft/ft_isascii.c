@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/11 17:43:22 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/15 16:28:03 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+int	ft_isascii(int c)
 {
-	t_printf	*ptr;
-	t_printf	a;
-
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }
+
+/*int main()
+{
+	char	c;
+
+	c = -5;
+	printf("Fonction C = %i\n", isascii(c));
+	printf("Fonction mano = %i\n", ft_isascii(c));
+}*/

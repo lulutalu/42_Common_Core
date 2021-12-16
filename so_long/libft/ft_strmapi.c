@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/27 20:41:15 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/27 21:00:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 {
-	t_printf	*ptr;
-	t_printf	a;
+	char	*res;
+	size_t	ires;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	if (s == NULL)
+		return (NULL);
+	ires = 0;
+	res = ft_calloc((ft_strlen(s) + 1), sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	while (ires < ft_strlen(s))
+	{
+		res[ires] = f(ires, s[ires]);
+		ires++;
+	}
+	return (res);
 }

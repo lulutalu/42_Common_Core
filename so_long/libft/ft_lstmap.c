@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/31 15:04:26 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/31 16:16:18 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 {
-	t_printf	*ptr;
-	t_printf	a;
+	t_list	*new;
+	t_list	*temp;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	new = NULL;
+	while (lst)
+	{
+		temp = ft_lstnew(f(lst->content));
+		if (temp == NULL)
+		{
+			ft_lstclear(&new, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new, temp);
+		lst = lst->next;
+	}
+	return (new);
 }

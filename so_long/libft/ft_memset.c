@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/11 18:38:33 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/15 16:28:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_printf	*ptr;
-	t_printf	a;
+	int	ib;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	ib = 0;
+	while (len-- > 0)
+		((char *)b)[ib++] = c;
+	return (b);
 }
+
+/*int main()
+{
+	char	b[] = "Ceci est un test";
+	int	c;
+	unsigned long	len;
+
+	c = 43;
+	len = 1;
+	printf("Fonction C = %s\n", memset(b, c, len));
+	printf("Fonction Mano = %s\n", ft_memset(b, c, len));
+}*/

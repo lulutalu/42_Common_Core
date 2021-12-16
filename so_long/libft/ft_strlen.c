@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/11 18:02:52 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/15 16:29:06 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+size_t	ft_strlen(const char *str)
 {
-	t_printf	*ptr;
-	t_printf	a;
+	size_t	i;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
+
+/*int	main()
+{
+	const char	*str;
+
+	str = "Guit c'est vraiment le plus bo";
+	printf("Fonction C = %lu\n", strlen(str));
+	printf("Fonction mano = %lu\n", ft_strlen(str));
+}*/

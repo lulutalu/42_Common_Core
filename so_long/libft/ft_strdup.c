@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/24 22:19:41 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/12/01 22:33:39 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+char	*ft_strdup(const char *s1)
 {
-	t_printf	*ptr;
-	t_printf	a;
+	char	*copy;
+	int		icopy;
+	int		istr;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	if (s1 == NULL)
+		return (NULL);
+	icopy = 0;
+	istr = 0;
+	copy = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (! copy)
+		return (NULL);
+	while (s1[istr] != '\0')
+		copy[icopy++] = s1[istr++];
+	copy[icopy] = '\0';
+	return (copy);
 }

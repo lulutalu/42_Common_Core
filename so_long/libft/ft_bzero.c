@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:09:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:08 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/13 14:30:34 by lduboulo          #+#    #+#             */
+/*   Updated: 2021/10/27 11:49:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *input, ...)
+void	*ft_bzero(void *s, size_t n)
 {
-	t_printf	*ptr;
-	t_printf	a;
+	int	is;
 
-	ptr = &a;
-	va_start(ptr->arg, input);
-	struct_init(ptr);
-	variable_counter(ptr, input);
-	ptr->i = 0;
-	core_process(ptr, input);
-	while (input[ptr->i])
-		ptr->count += ft_putchar_fd_count(input[ptr->i++], 1);
-	return (ptr->count);
+	is = 0;
+	while (n-- > 0)
+		((char *)s)[is++] = '\0';
+	return (s);
 }
+
+/*int main()
+{
+	char	s[] = "Ceci est un test";
+	unsigned long n;
+
+	n = 15;
+	printf("Fonction C = %s\n", bzero(s, n));
+	printf("Fonction mano = %s\n", ft_bzero(s, n));
+}*/
