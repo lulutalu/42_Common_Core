@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2021/12/16 17:23:29 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/12/28 16:16:05 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,5 +59,3 @@ fclean : clean
 	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./so_long $(GREY)===================================$(RESET)"
 
 re : fclean all
-
-.PHONY : all clean fclean re
