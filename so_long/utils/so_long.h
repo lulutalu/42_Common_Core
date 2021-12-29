@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:44:16 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/12/29 17:26:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <stdlib.h>
+# include <math.h>
 
 # endif
