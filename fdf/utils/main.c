@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:58:22 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/29 20:17:39 by lduboulo         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:44:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,3 @@ int	main(void)
 	//mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
 	mlx_loop(win.mlx);
 }
-

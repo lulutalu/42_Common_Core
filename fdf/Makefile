@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2021/12/28 16:16:05 by lduboulo         ###   ########.fr        #
+#    Updated: 2021/12/30 18:15:38 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBFT = libft.a
 
 MINILIBPATH = ./mlx
 
-NAME = so_long
+NAME = fdf
 
 CC = gcc
 
@@ -44,7 +44,7 @@ $(NAME) : $(OBJ)
 	@$(MAKE) -C $(LIBFTPATH) bonus
 	@$(MAKE) -C $(MINILIBPATH)
 	@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(OBJ) $(LIBFTPATH)/$(LIBFT) 
-	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)./so_long $(GREY)===================================$(RESET)"
+	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)./fdf $(GREY)===================================$(RESET)"
 
 clean :
 	@$(MAKE) -C $(LIBFTPATH) clean
@@ -56,6 +56,8 @@ fclean : clean
 	@$(MAKE) -C $(LIBFTPATH) fclean
 	@$(MAKE) -C $(MINILIBPATH) clean
 	@rm -f $(NAME)
-	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./so_long $(GREY)===================================$(RESET)"
+	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./fdf $(GREY)===================================$(RESET)"
 
 re : fclean all
+
+.PHONY : all clean fclean re
