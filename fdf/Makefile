@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/01/03 21:16:33 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/04 18:21:48 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC = ./utils/main.c \
 	  ./utils/get_next_line_utils.c \
 	  ./utils/argument_check.c \
 	  ./utils/file_desc_manipulation.c \
+	  ./utils/map_process.c \
 
 OBJ = $(SRC:.c=.o)
 

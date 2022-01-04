@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/03 21:16:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:21:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ typedef struct s_file {
 	int		argc;
 }				t_file;
 
+typedef struct s_map {
+	char	*line;
+	int		y;
+	int		x;
+	int		nbline;
+	int		**array;
+}				t_map;
+
 /*
  * File checking
 */
@@ -57,5 +65,12 @@ void	arg_check(t_file file);
 
 void	file_desc_opening(t_file *file);
 void	file_desc_closing(t_file *file);
+
+/*
+ * Map Manipulation and storage inside array
+*/
+
+void	nl_counter(t_map *map, t_file file);
+void	array_filling(t_map *map, t_file file);
 
 #endif
