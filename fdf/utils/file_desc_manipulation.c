@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   file_desc_manipulation.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/29 17:26:31 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/01/03 21:14:05 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/01/03 21:28:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "fdf.h"
 
-# include "so_long.h"
-# include "./../libft/libft.h"
-# include <stdio.h>
-# include <mlx.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <stdlib.h>
-# include <math.h>
+void	file_desc_opening(t_file *file)
+{
+	file->fd = open(file->name, O_RDONLY);
+	if (file->fd < 0)
+	{
+		ft_putendl_fd(FD_OP_ERROR, 2);
+		exit(EXIT_FAILURE);
+	}
+}
 
-# endif
+void	file_desc_closing(t_file *file)
+{
+	if (close(file->fd) != 0)
+	{
+		ft_putendl_fd(FD_CLS_ERROR, 2);
+		exit(EXIT_FAILURE);
+	}
+}

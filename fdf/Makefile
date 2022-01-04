@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2021/12/30 18:15:38 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/03 21:16:33 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,17 @@ NAME = fdf
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Imlx
+CFLAGS = -Wall -Werror -Wextra -Imlx -D BUFFER_SIZE=1
 
 MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-SRC = ./utils/main.c
+LLDBFLAGS = -g -fsanitize=address,undefined
+
+SRC = ./utils/main.c \
+	  ./utils/get_next_line.c \
+	  ./utils/get_next_line_utils.c \
+	  ./utils/argument_check.c \
+	  ./utils/file_desc_manipulation.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -50,14 +56,20 @@ clean :
 	@$(MAKE) -C $(LIBFTPATH) clean
 	@$(MAKE) -C $(MINILIBPATH) clean
 	@rm -f $(OBJ)
-	@echo "$(GREY)====================$(ORANGE) [Deleted] : $(RESET).o files $(GREY)===================================$(RESET)"
+	@echo "$(GREY)====================$(ORANGE) [Deleted] : $(RESET).o files $(GREY)================================$(RESET)"
 
 fclean : clean
 	@$(MAKE) -C $(LIBFTPATH) fclean
 	@$(MAKE) -C $(MINILIBPATH) clean
 	@rm -f $(NAME)
-	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./fdf $(GREY)===================================$(RESET)"
+	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./fdf $(GREY)=================$(RESET)"
 
 re : fclean all
 
-.PHONY : all clean fclean re
+debog : $(OBJ)
+	@$(MAKE) -C $(LIBFTPATH) bonus
+	@$(MAKE) -C $(MINILIBPATH)                                                                                              
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(LLDBFLAGS) -o $(NAME) $(OBJ) $(LIBFTPATH)/$(LIBFT) 
+	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)./fdf debog $(GREY)===================================$(RESET)"
+
+.PHONY : all clean fclean re debog
