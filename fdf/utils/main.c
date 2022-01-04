@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/04 18:21:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:23:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int argc, char **argv)
 	map.array = ft_calloc((map.nbline + 1), sizeof(int *));
 	file_desc_closing(&file);
 	file_desc_opening(&file);
-	array_filling(&map, file);
+	array_filling(&map, file);	
 	//////////////////////////
+	file_digit_check(&map);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/04 18:21:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:23:56 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define FILE_EXT "\033[1;31mThe argument possess the wrong extension\033[0m"
 # define FD_OP_ERROR "\033[1;31mAn error occured while opening the file\033[0m"
 # define FD_CLS_ERROR "\033[1;31mAn error occured while closing the file\033[0m"
+# define NOT_DIGIT "\033[1;31mThe file is not entirely filled with number\033[0m"
 
 /*
  * Structures
@@ -49,7 +50,7 @@ typedef struct s_map {
 	int		y;
 	int		x;
 	int		nbline;
-	int		**array;
+	char	**array;
 }				t_map;
 
 /*
@@ -58,6 +59,7 @@ typedef struct s_map {
 
 int		extension_checker(char *filename);
 void	arg_check(t_file file);
+void	file_digit_check(t_map *map);
 
 /*
  * File Descriptor Manipulation
