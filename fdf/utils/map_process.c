@@ -6,61 +6,61 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/04 19:23:07 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:13:00 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	nl_counter(t_map *map, t_file file)
+void	nl_counter(t_txt_map *txt, t_file file)
 {
-	map->nbline = 0;
-	while (map->line != NULL)
+	txt->nbline = 0;
+	while (txt->line != NULL)
 	{
-		map->line = get_next_line(file.fd);
-		map->nbline++;
+		txt->line = get_next_line(file.fd);
+		txt->nbline++;
 	}
-	free(map->line);
+	free(txt->line);
 }
 
-void	array_filling(t_map *map, t_file file)
+void	array_filling(t_txt_map *txt, t_file file)
 {
-	map->x = 0;
-	while (map->x < (map->nbline - 1))
+	txt->x = 0;
+	while (txt->x < (txt->nbline - 1))
 	{
-		map->line = get_next_line(file.fd);
-		map->array[map->x] = ft_calloc((ft_strlen(map->line) + 1), sizeof(char));
-		map->y = 0;
-		while (map->line[map->y])
+		txt->line = get_next_line(file.fd);
+		txt->array[txt->x] = ft_calloc((ft_strlen(txt->line) + 1), sizeof(char));
+		txt->y = 0;
+		while (txt->line[txt->y])
 		{
-			map->array[map->x][map->y] = map->line[map->y];
-			map->y++;
+			txt->array[txt->x][txt->y] = txt->line[txt->y];
+			txt->y++;
 		}
-		map->x++;
+		txt->x++;
 	}
 }
 
-void	file_digit_check(t_map *map)
+void	file_digit_check(t_txt_map *txt)
 {
-	map->x = 0;
-	while (map->x < (map->nbline - 1))
+	txt->x = 0;
+	while (txt->x < (txt->nbline - 1))
 	{
-		map->y = 0;
-		while (map->array[map->x][map->y])
+		txt->y = 0;
+		while (txt->array[txt->x][txt->y])
 		{
-			if (!((map->array[map->x][map->y] >= '0' \
-						&& map->array[map->x][map->y] <= '9') \
-						|| map->array[map->x][map->y] == '-' \
-						|| map->array[map->x][map->y] == ' ' \
-						|| map->array[map->x][map->y] == '\0' \
-						|| map->array[map->x][map->y] == '\n'))
+			if (!((txt->array[txt->x][txt->y] >= '0' \
+						&& txt->array[txt->x][txt->y] <= '9') \
+						|| txt->array[txt->x][txt->y] == '-' \
+						|| txt->array[txt->x][txt->y] == ' ' \
+						|| txt->array[txt->x][txt->y] == '\0' \
+						|| txt->array[txt->x][txt->y] == '\n'))
 			{
 				ft_putendl_fd(NOT_DIGIT, 2);
 				exit(EXIT_FAILURE);
 			}
 			else
-				map->y++;
+				txt->y++;
 		}
-		map->x++;
+		txt->x++;
 	}
 }
