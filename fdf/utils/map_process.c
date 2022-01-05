@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 21:45:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:29:47 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	array_filling(t_txt_map *txt, t_file file)
 		txt->line = get_next_line(file.fd);
 		txt->array[txt->x] = ft_calloc(\
 				(ft_strlen(txt->line) + 1), sizeof(char));
+		mem_alloc_check(txt->array[txt->x]);
 		txt->y = 0;
 		while (txt->line[txt->y])
 		{
@@ -69,6 +70,7 @@ void	file_digit_check(t_txt_map *txt)
 void	int_array(t_map *map, t_txt_map *txt)
 {
 	map->map = ft_calloc((txt->nbline + 1), sizeof(int *));
+	mem_alloc_check(map->map);
 	txt->x = 0;
 	map->x = 0;
 	while (txt->x < (txt->nbline - 1))
@@ -78,6 +80,7 @@ void	int_array(t_map *map, t_txt_map *txt)
 		while (map->splited[map->nb])
 			map->nb++;
 		map->map[map->x] = ft_calloc(map->nb, sizeof(int));
+		mem_alloc_check(map->map[map->x]);
 		map->nb = 0;
 		map->y = 0;
 		while (map->splited[map->nb])

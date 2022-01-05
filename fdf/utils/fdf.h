@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 21:45:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:29:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define FD_OP_ERROR "\033[1;31mAn error occured while opening the file\033[0m"
 # define FD_CLS_ERROR "\033[1;31mAn error occured while closing the file\033[0m"
 # define NOT_DIGIT "\033[1;31mThe file is not entirely filled with number\033[0m"
+# define ALLOC_ER "\033[1;31mDynamic Allocation fail\033[0m"
 
 /*
  * Structures
@@ -61,6 +62,25 @@ typedef struct s_map {
 	int		y;
 }				t_map;
 
+typedef struct s_coord {
+	int		x;
+	int		y;
+	int		z;
+}				t_coord;
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+typedef struct s_mlx {
+	void	*mlx;
+	void	*mlx_win;
+}				t_mlx;
+
 /*
  * File checking
 */
@@ -83,5 +103,11 @@ void	file_desc_closing(t_file *file);
 void	nl_counter(t_txt_map *txt, t_file file);
 void	array_filling(t_txt_map *txt, t_file file);
 void	int_array(t_map *map, t_txt_map *txt);
+
+/*
+ * Little Functions
+*/
+
+void	mem_alloc_check(void *ptr);
 
 #endif

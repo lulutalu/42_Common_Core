@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_desc_manipulation.c                           :+:      :+:    :+:   */
+/*   little_function.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 21:14:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 22:15:16 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/01/05 22:12:47 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/01/05 22:19:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	file_desc_opening(t_file *file)
+void	mem_alloc_check(void *ptr)
 {
-	file->fd = open(file->name, O_RDONLY);
-	if (file->fd < 0)
+	if (ptr == NULL)
 	{
-		ft_putendl_fd(FD_OP_ERROR, 2);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	file_desc_closing(t_file *file)
-{
-	if (close(file->fd) != 0)
-	{
-		ft_putendl_fd(FD_CLS_ERROR, 2);
+		free(ptr);
+		ft_putendl_fd(ALLOC_ER, 2);
 		exit(EXIT_FAILURE);
 	}
 }
