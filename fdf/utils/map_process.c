@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 15:13:00 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/05 21:45:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	array_filling(t_txt_map *txt, t_file file)
 	while (txt->x < (txt->nbline - 1))
 	{
 		txt->line = get_next_line(file.fd);
-		txt->array[txt->x] = ft_calloc((ft_strlen(txt->line) + 1), sizeof(char));
+		txt->array[txt->x] = ft_calloc(\
+				(ft_strlen(txt->line) + 1), sizeof(char));
 		txt->y = 0;
 		while (txt->line[txt->y])
 		{
@@ -62,5 +63,32 @@ void	file_digit_check(t_txt_map *txt)
 				txt->y++;
 		}
 		txt->x++;
+	}
+}
+
+void	int_array(t_map *map, t_txt_map *txt)
+{
+	map->map = ft_calloc((txt->nbline + 1), sizeof(int *));
+	txt->x = 0;
+	map->x = 0;
+	while (txt->x < (txt->nbline - 1))
+	{
+		map->splited = ft_split(txt->array[txt->x], ' ');
+		map->nb = 0;
+		while (map->splited[map->nb])
+			map->nb++;
+		map->map[map->x] = ft_calloc(map->nb, sizeof(int));
+		map->nb = 0;
+		map->y = 0;
+		while (map->splited[map->nb])
+		{
+			map->map[map->x][map->y] = ft_atoi(map->splited[map->nb]);
+			map->y++;
+			map->nb++;
+		}
+		free(txt->array[txt->x]);
+		free(map->splited);
+		txt->x++;
+		map->x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 15:12:57 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/05 21:45:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_txt_map {
 typedef struct s_map {
 	int		**map;
 	char	**splited;
+	int		nb;
 	int		x;
 	int		y;
 }				t_map;
@@ -81,5 +82,6 @@ void	file_desc_closing(t_file *file);
 
 void	nl_counter(t_txt_map *txt, t_file file);
 void	array_filling(t_txt_map *txt, t_file file);
+void	int_array(t_map *map, t_txt_map *txt);
 
 #endif
