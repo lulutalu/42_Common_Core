@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 22:29:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:03:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@
 # define FD_CLS_ERROR "\033[1;31mAn error occured while closing the file\033[0m"
 # define NOT_DIGIT "\033[1;31mThe file is not entirely filled with number\033[0m"
 # define ALLOC_ER "\033[1;31mDynamic Allocation fail\033[0m"
+# define WIN_ERROR "\033[1;31mError while creating the window\033[0m"
+# define WHITE 0x00FFFFFF  
 
 /*
- * Structures
+ * Structures for Array
 */
 
 typedef struct s_file {
@@ -62,24 +64,41 @@ typedef struct s_map {
 	int		y;
 }				t_map;
 
+/*
+ * Structures for mlx and drawing
+*/
+
 typedef struct s_coord {
 	int		x;
 	int		y;
 	int		z;
+	int		color;
 }				t_coord;
 
-typedef struct s_data {
+typedef struct s_line {
+	double	x;
+	double	y;
+	double	delta_x;
+	double	delta_y;
+	int		len;
+}				t_line;
+
+typedef struct s_mlx {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
-
-typedef struct s_mlx {
 	void	*mlx;
 	void	*mlx_win;
 }				t_mlx;
+
+typedef struct s_res {
+	int		x;
+	int		y;
+	int		x_scale;
+	int		y_scale;
+}				t_res;
 
 /*
  * File checking
@@ -109,5 +128,13 @@ void	int_array(t_map *map, t_txt_map *txt);
 */
 
 void	mem_alloc_check(void *ptr);
+
+/*
+ * mlx functions
+*/
+
+void	window_init(t_mlx *mlx, t_res res);
+void	print_line(t_mlx win, t_coord start, t_coord final);
+void	my_mlx_pixel_put(t_mlx *mlx, t_line *line, int color);
 
 #endif

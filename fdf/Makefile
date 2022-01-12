@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/01/05 22:19:04 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/08 16:52:57 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SRC = ./utils/main.c \
 	  ./utils/file_desc_manipulation.c \
 	  ./utils/map_process.c \
 	  ./utils/little_function.c \
+	  ./utils/mlx_drawing_algorithm.c \
+	  ./utils/mlx_win_management.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:58:22 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 22:17:53 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/06 18:34:19 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ typedef struct	s_mlx
 	void	*mlx_win;
 }				t_mlx;
 
-/*void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}*/
+}
 
 void	print_square(t_mlx win, int color)
 {

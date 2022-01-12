@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/05 22:29:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:15:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	main(int argc, char **argv)
 	t_txt_map	txt;
 	t_file		file;
 	t_map		map;
+	t_coord		start;
+	t_coord		final;
+	t_mlx		mlx;
+	t_res		res;
 
 	file.name = argv[1];
 	file.argc = argc;
@@ -37,6 +41,27 @@ int	main(int argc, char **argv)
 	file_digit_check(&txt);
 	//////////////////////////
 	int_array(&map, &txt);
-
+	res.x = 1920;
+	res.y = 1080;
+	window_init(&mlx, res);
+	map.x = 0;
+	res.x_scale = res.x / map.nb;
+	res.y_scale = res.y / map.nb;
+	while (map.x < txt.nbline)
+	{
+		map.y = 0;
+		while (map.y < map.nb)
+		{
+			start.x = map.y * res.x_scale;
+			start.y = map.x * res.y_scale;
+			map.y++;
+			final.x = map.y * res.x_scale;
+			final.y = map.x * res.y_scale;
+			print_line(mlx, start, final);
+		}
+		map.x++;
+	}
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
+	mlx_loop(mlx.mlx);
 	return (1);
 }

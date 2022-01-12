@@ -19,10 +19,6 @@ vsplit
 wincmd _ | wincmd |
 vsplit
 2wincmd h
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 wincmd w
 wincmd w
 set nosplitbelow
@@ -32,12 +28,9 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 30 + 31) / 63)
 exe 'vert 1resize ' . ((&columns * 119 + 159) / 318)
-exe '2resize ' . ((&lines * 30 + 31) / 63)
-exe 'vert 2resize ' . ((&columns * 119 + 159) / 318)
-exe 'vert 3resize ' . ((&columns * 104 + 159) / 318)
-exe 'vert 4resize ' . ((&columns * 93 + 159) / 318)
+exe 'vert 2resize ' . ((&columns * 104 + 159) / 318)
+exe 'vert 3resize ' . ((&columns * 93 + 159) / 318)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -48,15 +41,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 15) / 30)
+let s:l = 48 - ((5 * winheight(0) + 29) / 58)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+48
 normal! 0
 wincmd w
 argglobal
-if bufexists("Makefile") | buffer Makefile | else | edit Makefile | endif
+if bufexists("utils/mlx_win_management.c") | buffer utils/mlx_win_management.c | else | edit utils/mlx_win_management.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -66,30 +59,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 15) / 30)
+let s:l = 34 - ((33 * winheight(0) + 29) / 58)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
-wincmd w
-argglobal
-if bufexists("utils/argument_check.c") | buffer utils/argument_check.c | else | edit utils/argument_check.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 30) / 61)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
+34
+normal! 08|
 wincmd w
 argglobal
 if bufexists("utils/main.c") | buffer utils/main.c | else | edit utils/main.c | endif
@@ -102,25 +77,22 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 30) / 61)
+let s:l = 44 - ((43 * winheight(0) + 29) / 58)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+44
 normal! 0
 wincmd w
-4wincmd w
-exe '1resize ' . ((&lines * 30 + 31) / 63)
 exe 'vert 1resize ' . ((&columns * 119 + 159) / 318)
-exe '2resize ' . ((&lines * 30 + 31) / 63)
-exe 'vert 2resize ' . ((&columns * 119 + 159) / 318)
-exe 'vert 3resize ' . ((&columns * 104 + 159) / 318)
-exe 'vert 4resize ' . ((&columns * 93 + 159) / 318)
+exe 'vert 2resize ' . ((&columns * 104 + 159) / 318)
+exe 'vert 3resize ' . ((&columns * 93 + 159) / 318)
 tabnext 1
-badd +0 utils/main.c
+badd +1 utils/fdf.h
+badd +1 utils/main.c
 badd +0 Makefile
-badd +0 utils/fdf.h
 badd +0 utils/argument_check.c
+badd +0 utils/mlx_win_management.c
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
