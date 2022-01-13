@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 12:50:51 by lduboulo          #+#    #+#              #
-#    Updated: 2021/12/16 16:04:17 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/13 22:46:47 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC = ft_atoi.c \
 	  ft_calloc.c \
 	  ft_strdup.c \
 	  ft_substr.c \
+	  ft_dyn_substr.c \
 	  ft_strjoin.c \
 	  ft_strtrim.c \
 	  ft_split.c \
