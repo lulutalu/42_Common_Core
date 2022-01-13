@@ -28,9 +28,9 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 119 + 159) / 318)
-exe 'vert 2resize ' . ((&columns * 104 + 159) / 318)
-exe 'vert 3resize ' . ((&columns * 93 + 159) / 318)
+exe 'vert 1resize ' . ((&columns * 89 + 159) / 318)
+exe 'vert 2resize ' . ((&columns * 94 + 159) / 318)
+exe 'vert 3resize ' . ((&columns * 133 + 159) / 318)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -41,7 +41,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((5 * winheight(0) + 29) / 58)
+let s:l = 48 - ((5 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -49,7 +49,7 @@ normal! zt
 normal! 0
 wincmd w
 argglobal
-if bufexists("utils/mlx_win_management.c") | buffer utils/mlx_win_management.c | else | edit utils/mlx_win_management.c | endif
+if bufexists("utils/map_process.c") | buffer utils/map_process.c | else | edit utils/map_process.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -59,12 +59,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 34 - ((33 * winheight(0) + 29) / 58)
+let s:l = 1 - ((0 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-34
-normal! 08|
+1
+normal! 0
 wincmd w
 argglobal
 if bufexists("utils/main.c") | buffer utils/main.c | else | edit utils/main.c | endif
@@ -77,22 +77,24 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 44 - ((43 * winheight(0) + 29) / 58)
+let s:l = 44 - ((43 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 44
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 119 + 159) / 318)
-exe 'vert 2resize ' . ((&columns * 104 + 159) / 318)
-exe 'vert 3resize ' . ((&columns * 93 + 159) / 318)
+3wincmd w
+exe 'vert 1resize ' . ((&columns * 89 + 159) / 318)
+exe 'vert 2resize ' . ((&columns * 94 + 159) / 318)
+exe 'vert 3resize ' . ((&columns * 133 + 159) / 318)
 tabnext 1
 badd +1 utils/fdf.h
 badd +1 utils/main.c
-badd +0 Makefile
-badd +0 utils/argument_check.c
-badd +0 utils/mlx_win_management.c
+badd +34 utils/mlx_win_management.c
+badd +1 Makefile
+badd +1 utils/argument_check.c
+badd +0 utils/map_process.c
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

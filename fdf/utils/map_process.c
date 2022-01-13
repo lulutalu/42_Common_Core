@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/08 17:33:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/13 22:36:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	array_filling(t_txt_map *txt, t_file file)
 	while (txt->x < (txt->nbline - 1))
 	{
 		txt->line = get_next_line(file.fd);
+		txt->line = ft_substr(txt->line, 0, ft_strlen(txt->line) - 1);
 		txt->array[txt->x] = ft_calloc(\
 				(ft_strlen(txt->line) + 1), sizeof(char));
 		mem_alloc_check(txt->array[txt->x]);
@@ -39,6 +40,7 @@ void	array_filling(t_txt_map *txt, t_file file)
 			txt->y++;
 		}
 		txt->x++;
+		free(txt->line);
 	}
 }
 

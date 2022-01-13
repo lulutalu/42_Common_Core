@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/08 17:15:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/13 22:37:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(int argc, char **argv)
 	t_txt_map	txt;
 	t_file		file;
 	t_map		map;
-	t_coord		start;
-	t_coord		final;
-	t_mlx		mlx;
+	//t_coord		start;
+	//t_coord		final;
+	//t_mlx		mlx;
 	t_res		res;
 
 	file.name = argv[1];
@@ -43,25 +43,24 @@ int	main(int argc, char **argv)
 	int_array(&map, &txt);
 	res.x = 1920;
 	res.y = 1080;
-	window_init(&mlx, res);
+	//window_init(&mlx, res);
+	//At this point of the process, map.x is equal to the number of line
+	//And map.y is bigger by 1 to the number of "words" and equal to map.nb
+	//With those information, we can decide to use map.nb to set up frontier
 	map.x = 0;
-	res.x_scale = res.x / map.nb;
-	res.y_scale = res.y / map.nb;
-	while (map.x < txt.nbline)
+	map.y = 0;
+	printf("Nombre de lignes : %d Nombre de points %d\n", txt.nbline, map.nb);
+	while (map.y < (txt.nbline - 1))
 	{
-		map.y = 0;
-		while (map.y < map.nb)
-		{
-			start.x = map.y * res.x_scale;
-			start.y = map.x * res.y_scale;
-			map.y++;
-			final.x = map.y * res.x_scale;
-			final.y = map.x * res.y_scale;
-			print_line(mlx, start, final);
-		}
-		map.x++;
+		map.x = 0;
+		while (map.x < map.nb)
+			printf("%d ", map.map[map.y][map.x++]);
+		printf("\n");
+		map.y++;
 	}
+	/*res.x_scale = res.x / map.nb;
+	res.y_scale = res.y / map.nb;	
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
-	mlx_loop(mlx.mlx);
+	mlx_loop(mlx.mlx);*/
 	return (1);
 }
