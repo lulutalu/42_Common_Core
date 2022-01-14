@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/13 22:37:07 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:50:58 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(int argc, char **argv)
 	t_txt_map	txt;
 	t_file		file;
 	t_map		map;
-	//t_coord		start;
-	//t_coord		final;
-	//t_mlx		mlx;
+	t_coord		start;
+	t_coord		final;
+	t_mlx		mlx;
 	t_res		res;
 
 	file.name = argv[1];
@@ -43,24 +43,61 @@ int	main(int argc, char **argv)
 	int_array(&map, &txt);
 	res.x = 1920;
 	res.y = 1080;
-	//window_init(&mlx, res);
-	//At this point of the process, map.x is equal to the number of line
-	//And map.y is bigger by 1 to the number of "words" and equal to map.nb
-	//With those information, we can decide to use map.nb to set up frontier
-	map.x = 0;
+	window_init(&mlx, res);
+	//To stop loop use txt.nbline - 1 with map.y and map.nb for map.x
 	map.y = 0;
-	printf("Nombre de lignes : %d Nombre de points %d\n", txt.nbline, map.nb);
-	while (map.y < (txt.nbline - 1))
+	map.x = 0;
+	res.x_scale = res.x / (map.nb - 1);
+	res.y_scale = res.y / (txt.nbline - 2);
+	if (map.y == 0 && map.x == 0)
 	{
-		map.x = 0;
-		while (map.x < map.nb)
-			printf("%d ", map.map[map.y][map.x++]);
-		printf("\n");
-		map.y++;
+		start.y = map.y * res.y_scale;
+		start.x = map.x * res.x_scale;
+		final.y = (map.y + 1) * res.y_scale;
+		final.x = start.x;
+		print_line(mlx, start, final);
+		final.y = start.y;
+		final.x = (map.x + 1) * res.x_scale;
+		print_line(mlx, start, final);
 	}
-	/*res.x_scale = res.x / map.nb;
-	res.y_scale = res.y / map.nb;	
+	map.x = (map.nb - 1);
+	if (map.y == 0 && map.x == (map.nb - 1))
+	{
+		start.y = map.y * res.y_scale;
+		start.x = map.x * res.x_scale;
+		final.y = (map.y + 1) * res.y_scale;
+		final.x = start.x;
+		print_line(mlx, start, final);
+		final.y = start.y;
+		final.x = (map.x - 1) * res.x_scale;
+		print_line(mlx, start, final);
+	}
+	map.y = (txt.nbline - 2);
+	map.x = 0;
+	if (map.y == (txt.nbline - 2) && map.x == 0)
+	{
+		start.y = (map.y * res.y_scale) - 1;
+		start.x = map.x * res.x_scale;
+		final.y = (map.y - 1) * res.y_scale;
+		final.x = start.x;
+		print_line(mlx, start, final);
+		final.y = start.y;
+		final.x = (map.x + 1) * res.x_scale;
+		print_line(mlx, start, final);
+	}
+	map.x = (map.nb - 1);
+	if (map.y == (txt.nbline - 2) && map.x == (map.nb - 1))
+	{
+		start.y = (map.y * res.y_scale) - 1;
+		start.x = (map.x * res.x_scale) - 1;
+		final.y = (map.y - 1) * res.y_scale;
+		final.x = start.x;
+		print_line(mlx, start, final);
+		final.y = start.y;
+		final.x = (map.x - 1) * res.x_scale;
+		print_line(mlx, start, final);
+	}
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
-	mlx_loop(mlx.mlx);*/
+	mlx_loop(mlx.mlx);
 	return (1);
 }
