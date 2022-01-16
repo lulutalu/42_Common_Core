@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/08 17:03:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:31:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef struct s_map {
 */
 
 typedef struct s_coord {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	int		z;
 	int		color;
 }				t_coord;
@@ -94,10 +94,10 @@ typedef struct s_mlx {
 }				t_mlx;
 
 typedef struct s_res {
-	int		x;
-	int		y;
-	int		x_scale;
-	int		y_scale;
+	float	x;
+	float	y;
+	float	x_scale;
+	float	y_scale;
 }				t_res;
 
 /*
