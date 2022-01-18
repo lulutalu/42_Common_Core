@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/18 16:41:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:03:38 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,44 @@ int	main(int argc, char **argv)
 	map.x = 0;
 	res.x_scale = 40; //res.x / map.nb;
 	res.y_scale = 40; //(res.y + 100) / (txt.nbline - 1);
-	start.x = res.x / 2;
-	start.y = 300;
 	while (map.y < (txt.nbline - 1))
+	{
+		map.x = 0;
+		while (map.x < (map.nb - 1))
+		{
+			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(60)));
+			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(60)));
+			start.z = map.map[map.y][map.x++];
+			final.z = map.map[map.y][map.x];
+			if (start.z == 0 && final.z == 0)
+			{
+				final.x = start.x + fabs(res.x_scale * cos(60));
+				final.y = start.y + fabs(res.y_scale * sin(60));
+				print_line(mlx, start, final);
+			}
+		}
+		map.y++;
+	}
+	map.x = 0;
+	while (map.x < map.nb)
+	{
+		map.y = 0;
+		while (map.y < (txt.nbline - 2))
+		{
+			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(60)));
+			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(60)));
+			start.z = map.map[map.y++][map.x];
+			final.z = map.map[map.y][map.x];
+			if (start.z == 0 && final.z == 0)
+			{
+				final.x = start.x - fabs(res.x_scale * cos(60));
+				final.y = start.y + fabs(res.y_scale * sin(60));
+				print_line(mlx, start, final);
+			}
+		}
+		map.x++;
+	}
+	/*while (map.y < (txt.nbline - 1))
 	{
 		final.x = start.x + fabs((map.nb - 1) * res.x_scale * cos(60));
 		final.y = start.y + fabs((map.nb - 1) * res.y_scale * sin(60));
@@ -71,39 +106,7 @@ int	main(int argc, char **argv)
 		map.x++;
 		start.x = (res.x / 2) + fabs(map.x * (res.x_scale * cos(60)));
 		start.y = 300 + fabs(map.x * (res.y_scale * sin(60)));
-	}
-	/*x_proj = sqrt(3) * (1 / sqrt(6));
-	y_proj = (1 / sqrt(6));
-	printf("Projection X : %f\nProjection Y : %f\n", x_proj, y_proj);
-	while (map.y < (txt.nbline - 1))
-	{
-		start.y = ((map.y * res.y_scale) + (res.y_scale / 2)) * y_proj;
-		final.y = start.y;
-		map.x = 0;
-		while (map.x < (map.nb - 1))
-		{
-			start.x = ((map.x * res.x_scale) + (res.x_scale / 2)) * x_proj;
-			map.x++;
-			final.x = ((map.x * res.x_scale) + (res.x_scale / 2)) * x_proj;
-			print_line(mlx, start, final);
-		}
-		map.y++;
-	}
-	map.x = 0;
-	while (map.x < map.nb)
-	{
-		start.x = ((map.x * res.x_scale) + (res.x_scale / 2)) * x_proj;
-		final.x = start.x;
-		map.y = 0;
-		while (map.y < (txt.nbline - 2))
-		{
-			start.y = ((map.y * res.y_scale) + (res.y_scale / 2)) * y_proj;
-			map.y++;
-			final.y = ((map.y * res.y_scale) + (res.y_scale / 2)) * y_proj;
-			print_line(mlx, start, final);
-		}
-		map.x++;
-	}*/
+	}*/	
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	return (1);
