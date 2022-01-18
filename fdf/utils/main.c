@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/18 19:03:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:23:44 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,44 @@ int	main(int argc, char **argv)
 	//To stop loop use txt.nbline - 1 with map.y and map.nb for map.x
 	map.y = 0;
 	map.x = 0;
-	res.x_scale = 40; //res.x / map.nb;
-	res.y_scale = 40; //(res.y + 100) / (txt.nbline - 1);
+	res.x_scale = 30; //res.x / map.nb;
+	res.y_scale = 30; //(res.y + 100) / (txt.nbline - 1);
+	res.z_scale = 4;
 	while (map.y < (txt.nbline - 1))
 	{
 		map.x = 0;
 		while (map.x < (map.nb - 1))
 		{
-			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(60)));
-			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(60)));
+			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(alpha)));
+			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(alpha)));
 			start.z = map.map[map.y][map.x++];
 			final.z = map.map[map.y][map.x];
-			if (start.z == 0 && final.z == 0)
+			if (start.z - final.z == 0)
 			{
-				final.x = start.x + fabs(res.x_scale * cos(60));
-				final.y = start.y + fabs(res.y_scale * sin(60));
+				final.x = start.x + fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) - (start.z * res.z_scale);
+				start.y -= (start.z * res.z_scale);
 				print_line(mlx, start, final);
 			}
+			else if (final.z == 0)
+			{
+				final.x = start.x + fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha));
+				start.y -= (start.z * res.z_scale);
+				print_line(mlx, start, final);
+			}
+			else if (start.z < final.z)
+			{
+				final.x = start.x + fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) - ((final.z - start.z) * res.z_scale);
+				print_line(mlx, start, final);
+			}
+			else if (start.z > final.z)
+			{
+				final.x = start.x + fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) + ((final.z - start.z) * res.z_scale);
+				print_line(mlx, start, final);
+			}	
 		}
 		map.y++;
 	}
@@ -73,14 +94,34 @@ int	main(int argc, char **argv)
 		map.y = 0;
 		while (map.y < (txt.nbline - 2))
 		{
-			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(60)));
-			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(60)));
+			start.x = (res.x / 2) + ((map.y * -1 + map.x) * fabs(res.x_scale * cos(alpha)));
+			start.y = 300 + ((map.y + map.x) * fabs(res.y_scale * sin(alpha)));
 			start.z = map.map[map.y++][map.x];
 			final.z = map.map[map.y][map.x];
-			if (start.z == 0 && final.z == 0)
+			if (start.z - final.z == 0)
 			{
-				final.x = start.x - fabs(res.x_scale * cos(60));
-				final.y = start.y + fabs(res.y_scale * sin(60));
+				final.x = start.x - fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) - (start.z * res.z_scale);
+				start.y -= (start.z * res.z_scale);
+				print_line(mlx, start, final);
+			}
+			else if (final.z == 0)
+			{
+				final.x = start.x - fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha));
+				start.y -= (start.z * res.z_scale);
+				print_line(mlx, start, final);
+			}
+			else if (start.z < final.z)
+			{
+				final.x = start.x - fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) - ((final.z - start.z) * res.z_scale);
+				print_line(mlx, start, final);
+			}
+			else if (start.z > final.z)
+			{
+				final.x = start.x - fabs(res.x_scale * cos(alpha));
+				final.y = start.y + fabs(res.y_scale * sin(alpha)) + ((final.z - start.z) * res.z_scale);
 				print_line(mlx, start, final);
 			}
 		}

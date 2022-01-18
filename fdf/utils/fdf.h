@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/16 22:31:15 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:23:46 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@
 # define NOT_DIGIT "\033[1;31mThe file is not entirely filled with number\033[0m"
 # define ALLOC_ER "\033[1;31mDynamic Allocation fail\033[0m"
 # define WIN_ERROR "\033[1;31mError while creating the window\033[0m"
-# define WHITE 0x00FFFFFF  
+# define WHITE 0x96FFFFFF  
+# define PURPLE 0x00BF40BF
+# define BLUE 0x004682B4
+# define alpha 40
 
 /*
  * Structures for Array
@@ -98,6 +101,7 @@ typedef struct s_res {
 	float	y;
 	float	x_scale;
 	float	y_scale;
+	float	z_scale;
 }				t_res;
 
 /*
