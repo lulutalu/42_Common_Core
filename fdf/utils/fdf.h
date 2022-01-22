@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/21 19:36:29 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/22 19:28:51 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define WHITE 0x96FFFFFF  
 # define PURPLE 0x00BF40BF
 # define RED 0x00C41E3A
+# define BLACK 0x00000000
 # define BLUE 0x004682B4
 # define ALPHA 60
 
@@ -100,6 +101,7 @@ typedef struct s_mlx {
 typedef struct s_res {
 	float	x;
 	float	y;
+	float	x0;
 	float	x_scale;
 	float	y_scale;
 	float	z_scale;
@@ -132,18 +134,22 @@ void	int_array(t_map *map, t_txt_map *txt);
  * Little Functions
 */
 
+int		color_selection(t_coord start, t_coord final);
 void	mem_alloc_check(void *ptr);
 
 /*
  * mlx functions
 */
 
+void	scaling_adjustment(t_txt_map txt, t_map map, t_res *res);
+void	clear_map(t_res res, t_mlx mlx);
+void	drawing_process(t_mlx *mlx, t_txt_map txt, t_map map, t_res res);
 void	y_axis_draw(t_coord *start, t_coord *final, t_res res);
-void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res res);
+void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
 void	x_axis_draw(t_coord *start, t_coord *final, t_res res);
-void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res res);
+void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
 void	window_init(t_mlx *mlx, t_res res);
-void	print_line(t_mlx win, t_coord start, t_coord final);
+void	print_line(t_mlx win, t_coord start, t_coord final, int color);
 void	my_mlx_pixel_put(t_mlx *mlx, t_line *line, int color);
 
 #endif

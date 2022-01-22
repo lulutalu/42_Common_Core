@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/01/13 21:19:41 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/22 17:09:27 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ CFLAGS = -Wall -Werror -Wextra -Imlx -D BUFFER_SIZE=1
 
 MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-LLDBFLAGS = -g -fsanitize=address,undefined
+LLDBFLAGS = -g3 -fsanitize=address,undefined
 
 SRC = ./utils/main.c \
 	  ./utils/get_next_line.c \
@@ -65,15 +65,15 @@ clean :
 fclean : clean
 	@$(MAKE) -C $(LIBFTPATH) fclean
 	@$(MAKE) -C $(MINILIBPATH) clean
-	@rm -f $(NAME)
+	@rm -rf $(NAME) $(NAME).dSYM
 	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET).o and .a files - ./fdf $(GREY)=================$(RESET)"
 
 re : fclean all
 
-debog : $(OBJ)
+debog :
 	@$(MAKE) -C $(LIBFTPATH) bonus
 	@$(MAKE) -C $(MINILIBPATH)                                                                                              
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(LLDBFLAGS) -o $(NAME) $(OBJ) $(LIBFTPATH)/$(LIBFT) 
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(LLDBFLAGS) -o $(NAME) $(SRC) $(LIBFTPATH)/$(LIBFT) 
 	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)./fdf debog $(GREY)===================================$(RESET)"
 
 .PHONY : all clean fclean re debog

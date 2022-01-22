@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:09:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/17 15:31:42 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/22 19:50:32 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,60 @@ void	my_mlx_pixel_put(t_mlx *mlx, t_line *line, int color)
 	dst = mlx->addr + ((int)line->y * mlx->line_length + \
 			(int)line->x * (mlx->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	drawing_process(t_mlx *mlx, t_txt_map txt, t_map map, t_res res)
+{
+	scaling_adjustment(txt, map, &res);
+	y_axis_algorithm(*mlx, txt, &map, &res);
+	x_axis_algorithm(*mlx, txt, &map, &res);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+}
+
+void	scaling_adjustment(t_txt_map txt, t_map map, t_res *res)
+{
+	float	x_max;
+	float	x_min;
+	float	y_max;
+
+	x_max = 0;
+	while (x_max < (res->x - 100))
+	{
+		x_max = res->x0 + map.nb * fabs(res->x_scale * cos(ALPHA));
+		if (x_max < (res->x - 100))
+			res->x_scale *= 1.1;
+		if (x_max > res->x)
+			res->x_scale *= 0.9;
+	}
+	x_min = 210;
+	while (x_min > 200)
+	{
+		x_min = res->x0 - (txt.nbline - 1) * fabs(res->x_scale * cos(ALPHA));
+		if (x_min > 200)
+			res->x0 *= 0.9;
+		if (x_min < 200)
+			res->x0 *= 1.1;
+	}
+	y_max = 100 + (txt.nbline - 1 + map.nb) * fabs(res->y_scale * sin(ALPHA));
+	printf("Scale : %f\n", res->x_scale);
+}
+
+void	clear_map(t_res res, t_mlx mlx)
+{
+	t_coord	start;
+	t_coord	final;
+
+	start.y = 0;
+	while (start.y < res.y)
+	{
+		final.y = start.y;
+		start.x = 0;
+		while (start.x < res.x)
+		{
+			final.x = start.x + 1;
+			print_line(mlx, start, final, BLACK);
+			start.x += 1;
+		}
+		start.y += 1;
+	}
 }
