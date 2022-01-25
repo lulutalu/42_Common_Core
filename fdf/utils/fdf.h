@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/24 20:47:39 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:28:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	mem_alloc_check(void *ptr);
  * Scaling Functions
 */
 
+void	scaling_adjustment_y_max(t_map map, t_txt_map txt, t_res *res);
 void	scaling_adjustment_x_max(t_map map, t_res *res);
 void	scaling_adjustment_x0(t_txt_map txt, t_res *res);
 void	scaling_adjustment(t_txt_map txt, t_map map, t_res *res);
