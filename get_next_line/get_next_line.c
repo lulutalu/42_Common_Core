@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:04:32 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:31:20 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:12:30 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ char	*get_next_line(int fd)
 	return (read_loop(fd, &str));
 }
 
-int	main()
+/*int	main()
 {
 	int	fd = open("test.txt", O_RDONLY);
 	int	i = 10;
 
 	while (i-- > 0)
 		printf("%s", get_next_line(fd));
-}
+}*/

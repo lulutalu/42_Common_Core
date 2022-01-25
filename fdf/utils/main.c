@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/22 19:49:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/01/24 21:48:40 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	main(int argc, char **argv)
 	res.y = 1080;
 	//window_init(&mlx, res);
 	//To stop loop use txt.nbline - 1 with map.y and map.nb for map.x
-	res.x_scale = 10; //res.x / map.nb;
-	res.y_scale = 6; //(res.y + 100) / (txt.nbline - 1);
+	res.x_scale = 100; //res.x / map.nb;
+	res.y_scale = 7; //(res.y + 100) / (txt.nbline - 1);
 	res.z_scale = 10;
 	res.x0 = res.x / 2;
 	window_init(&mlx, res);

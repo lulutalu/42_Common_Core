@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/01/22 17:09:27 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/01/24 19:57:08 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = ./utils/main.c \
 	  ./utils/little_function.c \
 	  ./utils/mlx_drawing_algorithm.c \
 	  ./utils/mlx_win_management.c \
+	  ./utils/auto_scaling.c \
 
 OBJ = $(SRC:.c=.o)
 
