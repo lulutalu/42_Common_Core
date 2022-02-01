@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/25 15:28:43 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:33:41 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_res {
 	float	x;
 	float	y;
 	float	x0;
+	float	y0;
 	float	x_scale;
 	float	y_scale;
 	float	z_scale;
@@ -134,6 +135,9 @@ void	int_array(t_map *map, t_txt_map *txt);
  * Little Functions
 */
 
+void	find_max_z_value(t_map *map, t_txt_map txt, float mean);
+void	find_z_critical(t_map *map, t_txt_map txt, float mean);
+float	mean_value_tab(t_map map, t_txt_map txt);
 int		color_selection(t_coord start, t_coord final);
 void	mem_alloc_check(void *ptr);
 
@@ -141,6 +145,7 @@ void	mem_alloc_check(void *ptr);
  * Scaling Functions
 */
 
+void	scaling_adjustment_y_min(t_map map, t_res *res);
 void	scaling_adjustment_y_max(t_map map, t_txt_map txt, t_res *res);
 void	scaling_adjustment_x_max(t_map map, t_res *res);
 void	scaling_adjustment_x0(t_txt_map txt, t_res *res);

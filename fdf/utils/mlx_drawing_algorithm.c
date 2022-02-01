@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:02:11 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/25 15:39:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:21:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_line(t_mlx mlx, t_coord start, t_coord final, int color)
 	line.delta_y /= line.len;
 	while (line.len > 0)
 	{
-		my_mlx_pixel_put(&mlx, &line, color);
+		if ((line.x <= 1920 && line.x >= 0) && (line.y <= 1080 && line.y >= 0))
+			my_mlx_pixel_put(&mlx, &line, color);	
 		line.x += line.delta_x;
 		line.y += line.delta_y;
 		line.len--;
@@ -46,7 +47,7 @@ void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res)
 		{
 			start.x = res->x0 + ((map->y * -1 + map->x) * \
 					fabs(res->x_scale * cos(ALPHA)));
-			start.y = 100 + ((map->y + map->x) * \
+			start.y = res->y0 + ((map->y + map->x) * \
 					fabs(res->y_scale * sin(ALPHA)));
 			start.z = map->map[map->y][map->x++];
 			final.z = map->map[map->y][map->x];
@@ -92,7 +93,7 @@ void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res)
 		{
 			start.x = res->x0 + ((map->y * -1 + map->x) \
 					* fabs(res->x_scale * cos(ALPHA)));
-			start.y = 100 + ((map->y + map->x) * \
+			start.y = res->y0 + ((map->y + map->x) * \
 					fabs(res->y_scale * sin(ALPHA)));
 			start.z = map->map[map->y++][map->x];
 			final.z = map->map[map->y][map->x];
