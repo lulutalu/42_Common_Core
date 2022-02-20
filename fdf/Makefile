@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/01/24 19:57:08 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/02/20 19:14:52 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,4 +77,4 @@ debog :
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(LLDBFLAGS) -o $(NAME) $(SRC) $(LIBFTPATH)/$(LIBFT) 
 	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)./fdf debog $(GREY)===================================$(RESET)"
 
-.PHONY : all clean fclean re debog
+.PHONY : all clean fclean re debog leak

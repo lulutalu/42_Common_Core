@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/01 14:33:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:25:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ typedef struct s_map {
 */
 
 typedef struct s_coord {
-	double	x;
-	double	y;
-	int		z;
-	int		color;
+	double			x;
+	double			y;
+	int				z;
+	int				color;
+	struct s_coord	*start;
+	struct s_coord	*final;
 }				t_coord;
 
 typedef struct s_line {
@@ -138,7 +140,7 @@ void	int_array(t_map *map, t_txt_map *txt);
 void	find_max_z_value(t_map *map, t_txt_map txt, float mean);
 void	find_z_critical(t_map *map, t_txt_map txt, float mean);
 float	mean_value_tab(t_map map, t_txt_map txt);
-int		color_selection(t_coord start, t_coord final);
+int		color_selection(t_coord coord);
 void	mem_alloc_check(void *ptr);
 
 /*
@@ -156,12 +158,12 @@ void	scaling_adjustment(t_txt_map txt, t_map map, t_res *res);
 */
 
 void	drawing_process(t_mlx *mlx, t_txt_map txt, t_map map, t_res res);
-void	y_axis_draw(t_coord *start, t_coord *final, t_res res);
+void	y_axis_draw(t_coord *coord, t_res res);
 void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
-void	x_axis_draw(t_coord *start, t_coord *final, t_res res);
+void	x_axis_draw(t_coord *coord, t_res res);
 void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
 void	window_init(t_mlx *mlx, t_res res);
-void	print_line(t_mlx win, t_coord start, t_coord final, int color);
+void	print_line(t_mlx win, t_coord coord, int color, t_res res);
 void	my_mlx_pixel_put(t_mlx *mlx, t_line *line, int color);
 
 #endif
