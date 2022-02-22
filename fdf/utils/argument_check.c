@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 19:02:29 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/08 16:13:50 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:00:40 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ int	extension_checker(char *filename)
 		iext++;
 	}
 	if (filename[ifile] == '\0' && ext[iext] == '\0')
+	{
+		free(ext);
 		return (1);
+	}
 	else
+	{
+		free(ext);
 		return (0);
+	}
 }
 
 void	arg_check(t_file file)

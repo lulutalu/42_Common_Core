@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/20 20:25:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:26:41 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define BLACK 0x00000000
 # define BLUE 0x004682B4
 # define ALPHA 60
+# define ESC 53
 
 /*
  * Structures for Array
@@ -90,16 +91,6 @@ typedef struct s_line {
 	int		len;
 }				t_line;
 
-typedef struct s_mlx {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*mlx_win;
-}				t_mlx;
-
 typedef struct s_res {
 	float	x;
 	float	y;
@@ -110,13 +101,26 @@ typedef struct s_res {
 	float	z_scale;
 }				t_res;
 
+typedef struct s_fdf {
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	void		*mlx;
+	void		*mlx_win;
+	t_txt_map	txt;
+	t_map		map;
+	t_res		res;
+}				t_fdf;
+
 /*
  * File checking
 */
 
 int		extension_checker(char *filename);
 void	arg_check(t_file file);
-void	file_digit_check(t_txt_map *txt);
+void	file_digit_check(t_fdf *fdf);
 
 /*
  * File Descriptor Manipulation
@@ -129,17 +133,14 @@ void	file_desc_closing(t_file *file);
  * Map Manipulation and storage inside array
 */
 
-void	nl_counter(t_txt_map *txt, t_file file);
-void	array_filling(t_txt_map *txt, t_file file);
-void	int_array(t_map *map, t_txt_map *txt);
+void	nl_counter(t_fdf *fdf, t_file file);
+void	array_filling(t_fdf *fdf, t_file file);
+void	int_array(t_fdf *fdf);
 
 /*
  * Little Functions
 */
 
-void	find_max_z_value(t_map *map, t_txt_map txt, float mean);
-void	find_z_critical(t_map *map, t_txt_map txt, float mean);
-float	mean_value_tab(t_map map, t_txt_map txt);
 int		color_selection(t_coord coord);
 void	mem_alloc_check(void *ptr);
 
@@ -147,23 +148,30 @@ void	mem_alloc_check(void *ptr);
  * Scaling Functions
 */
 
-void	scaling_adjustment_y_min(t_map map, t_res *res);
-void	scaling_adjustment_y_max(t_map map, t_txt_map txt, t_res *res);
-void	scaling_adjustment_x_max(t_map map, t_res *res);
-void	scaling_adjustment_x0(t_txt_map txt, t_res *res);
-void	scaling_adjustment(t_txt_map txt, t_map map, t_res *res);
+void	scaling_adjustment_y_min(t_fdf *fdf);
+void	scaling_adjustment_y_max(t_fdf *fdf);
+void	scaling_adjustment_x_max(t_fdf *fdf);
+void	scaling_adjustment_x0(t_fdf *fdf);
+void	scaling_adjustment(t_fdf *fdf);
 
 /*
  * mlx functions
 */
 
-void	drawing_process(t_mlx *mlx, t_txt_map txt, t_map map, t_res res);
-void	y_axis_draw(t_coord *coord, t_res res);
-void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
-void	x_axis_draw(t_coord *coord, t_res res);
-void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res);
-void	window_init(t_mlx *mlx, t_res res);
-void	print_line(t_mlx win, t_coord coord, int color, t_res res);
-void	my_mlx_pixel_put(t_mlx *mlx, t_line *line, int color);
+void	drawing_process(t_fdf *fdf);
+void	y_axis_draw(t_coord *coord, t_fdf *fdf);
+void	y_axis_algorithm(t_fdf *fdf);
+void	x_axis_draw(t_coord *coord, t_fdf *fdf);
+void	x_axis_algorithm(t_fdf *fdf);
+void	window_init(t_fdf *fdf);
+void	print_line(t_coord coord, t_fdf fdf, int color);
+void	my_mlx_pixel_put(t_fdf *fdf, t_line *line, int color);
+
+/*
+ * Mlx Hooks
+*/
+
+int	key_hook(int keycode, t_fdf *fdf);
+//int	res_hook(int keycode, t_res *res);
 
 #endif

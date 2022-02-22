@@ -6,13 +6,13 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:02:11 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/20 16:33:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:35:33 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	print_line(t_mlx mlx, t_coord coord, int color, t_res res)
+void	print_line(t_coord coord, t_fdf fdf, int color)
 {
 	t_line	line;
 
@@ -26,105 +26,109 @@ void	print_line(t_mlx mlx, t_coord coord, int color, t_res res)
 	line.delta_y /= line.len;
 	while (line.len > 0)
 	{
-		if ((line.x <= res.x && line.x >= 0) && \
-				(line.y <= res.y && line.y >= 0))
-			my_mlx_pixel_put(&mlx, &line, color);
+		if ((line.x <= fdf.res.x && line.x >= 0) && \
+				(line.y <= fdf.res.y && line.y >= 0))
+			my_mlx_pixel_put(&fdf, &line, color);
 		line.x += line.delta_x;
 		line.y += line.delta_y;
 		line.len--;
 	}
 }
 
-void	y_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res)
+void	y_axis_algorithm(t_fdf *fdf)
 {
 	t_coord	coord;
 
 	coord.start = malloc(sizeof(coord));
 	coord.final = malloc(sizeof(coord));
-	map->y = 0;
-	while (map->y < (txt.nbline - 1))
+	fdf->map.y = 0;
+	while (fdf->map.y < (fdf->txt.nbline - 1))
 	{
-		map->x = 0;
-		while (map->x < (map->nb - 1))
+		fdf->map.x = 0;
+		while (fdf->map.x < (fdf->map.nb - 1))
 		{
-			coord.start->x = res->x0 + ((map->y * -1 + map->x) * \
-					fabs(res->x_scale * cos(ALPHA)));
-			coord.start->y = res->y0 + ((map->y + map->x) * \
-					fabs(res->y_scale * sin(ALPHA)));
-			coord.start->z = map->map[map->y][map->x++];
-			coord.final->z = map->map[map->y][map->x];
-			y_axis_draw(&coord, *res);
-			print_line(mlx, coord, color_selection(coord), *res);
+			coord.start->x = fdf->res.x0 + ((fdf->map.y * -1 + fdf->map.x) * \
+					fabs(fdf->res.x_scale * cos(ALPHA)));
+			coord.start->y = fdf->res.y0 + ((fdf->map.y + fdf->map.x) * \
+					fabs(fdf->res.y_scale * sin(ALPHA)));
+			coord.start->z = fdf->map.map[fdf->map.y][fdf->map.x++];
+			coord.final->z = fdf->map.map[fdf->map.y][fdf->map.x];
+			y_axis_draw(&coord, fdf);
+			print_line(coord, *fdf, color_selection(coord));
 		}	
-		map->y++;
+		fdf->map.y++;
 	}
+	free(coord.start);
+	free(coord.final);
 }
 
-void	y_axis_draw(t_coord *coord, t_res res)
+void	y_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x + fabs(res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(res.x_scale * cos(ALPHA));
-		coord->start->y -= res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->start->y -= fdf->res.z_scale * coord->start->z;
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA)) \
-					- (res.z_scale * coord->final->z);
-		coord->start->y -= res.z_scale * coord->start->z;
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA)) \
+					- (fdf->res.z_scale * coord->final->z);
+		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}
 }
 
-void	x_axis_algorithm(t_mlx mlx, t_txt_map txt, t_map *map, t_res *res)
+void	x_axis_algorithm(t_fdf *fdf)
 {
 	t_coord	coord;
 
 	coord.start = malloc(sizeof(coord));
 	coord.final = malloc(sizeof(coord));
-	map->x = 0;
-	while (map->x < map->nb)
+	fdf->map.x = 0;
+	while (fdf->map.x < fdf->map.nb)
 	{
-		map->y = 0;
-		while (map->y < (txt.nbline - 2))
+		fdf->map.y = 0;
+		while (fdf->map.y < (fdf->txt.nbline - 2))
 		{
-			coord.start->x = res->x0 + ((map->y * -1 + map->x) \
-					* fabs(res->x_scale * cos(ALPHA)));
-			coord.start->y = res->y0 + ((map->y + map->x) * \
-					fabs(res->y_scale * sin(ALPHA)));
-			coord.start->z = map->map[map->y++][map->x];
-			coord.final->z = map->map[map->y][map->x];
-			x_axis_draw(&coord, *res);
-			print_line(mlx, coord, color_selection(coord), *res);
+			coord.start->x = fdf->res.x0 + ((fdf->map.y * -1 + fdf->map.x) \
+					* fabs(fdf->res.x_scale * cos(ALPHA)));
+			coord.start->y = fdf->res.y0 + ((fdf->map.y + fdf->map.x) * \
+					fabs(fdf->res.y_scale * sin(ALPHA)));
+			coord.start->z = fdf->map.map[fdf->map.y++][fdf->map.x];
+			coord.final->z = fdf->map.map[fdf->map.y][fdf->map.x];
+			x_axis_draw(&coord, fdf);
+			print_line(coord, *fdf, color_selection(coord));
 		}
-		map->x++;
+		fdf->map.x++;
 	}
+	free(coord.start);
+	free(coord.final);
 }
 
-void	x_axis_draw(t_coord *coord, t_res res)
+void	x_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x - fabs(res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(res.x_scale * cos(ALPHA));
-		coord->start->y -= res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->start->y -= fdf->res.z_scale * coord->start->z;
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(res.y_scale * sin(ALPHA)) \
-					- (res.z_scale * coord->final->z);
-		coord->start->y -= res.z_scale * coord->start->z;
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA)) \
+					- (fdf->res.z_scale * coord->final->z);
+		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}
 }

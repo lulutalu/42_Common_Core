@@ -6,94 +6,94 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/20 20:25:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:14:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	nl_counter(t_txt_map *txt, t_file file)
+void	nl_counter(t_fdf *fdf, t_file file)
 {
-	txt->nbline = 0;
-	while (txt->line != NULL)
+	fdf->txt.nbline = 0;
+	while (fdf->txt.line != NULL)
 	{
-		txt->line = get_next_line(file.fd);
-		txt->nbline++;
+		fdf->txt.line = get_next_line(file.fd);
+		fdf->txt.nbline++;
 	}
-	free(txt->line);
+	free(fdf->txt.line);
 }
 
-void	array_filling(t_txt_map *txt, t_file file)
+void	array_filling(t_fdf *fdf, t_file file)
 {
-	txt->x = 0;
-	while (txt->x < (txt->nbline - 1))
+	fdf->txt.x = 0;
+	while (fdf->txt.x < (fdf->txt.nbline - 1))
 	{
-		txt->line = get_next_line(file.fd);
-		txt->line = ft_dyn_substr(&txt->line, 0, ft_strlen(txt->line) - 1);
-		txt->array[txt->x] = ft_calloc(\
-				(ft_strlen(txt->line) + 1), sizeof(char));
-		mem_alloc_check(txt->array[txt->x]);
-		txt->y = 0;
-		while (txt->line[txt->y])
+		fdf->txt.line = get_next_line(file.fd);
+		fdf->txt.line = ft_dyn_substr(&fdf->txt.line, 0, ft_strlen(fdf->txt.line) - 1);
+		fdf->txt.array[fdf->txt.x] = ft_calloc(\
+				(ft_strlen(fdf->txt.line) + 1), sizeof(char));
+		mem_alloc_check(fdf->txt.array[fdf->txt.x]);
+		fdf->txt.y = 0;
+		while (fdf->txt.line[fdf->txt.y])
 		{
-			txt->array[txt->x][txt->y] = txt->line[txt->y];
-			txt->y++;
+			fdf->txt.array[fdf->txt.x][fdf->txt.y] = fdf->txt.line[fdf->txt.y];
+			fdf->txt.y++;
 		}
-		txt->x++;
-		free(txt->line);
+		fdf->txt.x++;
+		free(fdf->txt.line);
 	}
 }
 
-void	file_digit_check(t_txt_map *txt)
+void	file_digit_check(t_fdf *fdf)
 {
-	txt->x = 0;
-	while (txt->x < (txt->nbline - 1))
+	fdf->txt.x = 0;
+	while (fdf->txt.x < (fdf->txt.nbline - 1))
 	{
-		txt->y = 0;
-		while (txt->array[txt->x][txt->y])
+		fdf->txt.y = 0;
+		while (fdf->txt.array[fdf->txt.x][fdf->txt.y])
 		{
-			if (!((txt->array[txt->x][txt->y] >= '0' \
-						&& txt->array[txt->x][txt->y] <= '9') \
-						|| txt->array[txt->x][txt->y] == '-' \
-						|| txt->array[txt->x][txt->y] == ' ' \
-						|| txt->array[txt->x][txt->y] == '\0' \
-						|| txt->array[txt->x][txt->y] == '\n'))
+			if (!((fdf->txt.array[fdf->txt.x][fdf->txt.y] >= '0' \
+						&& fdf->txt.array[fdf->txt.x][fdf->txt.y] <= '9') \
+						|| fdf->txt.array[fdf->txt.x][fdf->txt.y] == '-' \
+						|| fdf->txt.array[fdf->txt.x][fdf->txt.y] == ' ' \
+						|| fdf->txt.array[fdf->txt.x][fdf->txt.y] == '\0' \
+						|| fdf->txt.array[fdf->txt.x][fdf->txt.y] == '\n'))
 			{
 				ft_putendl_fd(NOT_DIGIT, 2);
 				exit(EXIT_FAILURE);
 			}
 			else
-				txt->y++;
+				fdf->txt.y++;
 		}
-		txt->x++;
+		fdf->txt.x++;
 	}
 }
 
-void	int_array(t_map *map, t_txt_map *txt)
+void	int_array(t_fdf *fdf)
 {
-	map->map = ft_calloc((txt->nbline + 1), sizeof(int *));
-	mem_alloc_check(map->map);
-	txt->x = 0;
-	map->x = 0;
-	while (txt->x < (txt->nbline - 1))
+	fdf->map.map = ft_calloc((fdf->txt.nbline + 1), sizeof(int *));
+	mem_alloc_check(fdf->map.map);
+	fdf->txt.x = 0;
+	fdf->map.x = 0;
+	while (fdf->txt.x < (fdf->txt.nbline - 1))
 	{
-		map->splited = ft_split(txt->array[txt->x], ' ');
-		map->nb = 0;
-		while (map->splited[map->nb])
-			map->nb++;
-		map->map[map->x] = ft_calloc(map->nb, sizeof(int));
-		mem_alloc_check(map->map[map->x]);
-		map->nb = 0;
-		map->y = 0;
-		while (map->splited[map->nb])
+		fdf->map.splited = ft_split(fdf->txt.array[fdf->txt.x], ' ');
+		fdf->map.nb = 0;
+		while (fdf->map.splited[fdf->map.nb])
+			fdf->map.nb++;
+		fdf->map.map[fdf->map.x] = ft_calloc(fdf->map.nb, sizeof(int));
+		mem_alloc_check(fdf->map.map[fdf->map.x]);
+		fdf->map.nb = 0;
+		fdf->map.y = 0;
+		while (fdf->map.splited[fdf->map.nb])
 		{
-			map->map[map->x][map->y] = ft_atoi(map->splited[map->nb]);
-			map->y++;
-			map->nb++;
+			fdf->map.map[fdf->map.x][fdf->map.y] = ft_atoi(fdf->map.splited[fdf->map.nb]);
+			fdf->map.y++;
+			fdf->map.nb++;
 		}
-		free(txt->array[txt->x]);
-		free(map->splited);
-		txt->x++;
-		map->x++;
+		free(fdf->txt.array[fdf->txt.x]);
+		free(fdf->map.splited);
+		fdf->txt.x++;
+		fdf->map.x++;
 	}
 }
