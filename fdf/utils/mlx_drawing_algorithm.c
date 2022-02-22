@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:02:11 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 17:35:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:09:31 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	y_axis_algorithm(t_fdf *fdf)
 		while (fdf->map.x < (fdf->map.nb - 1))
 		{
 			coord.start->x = fdf->res.x0 + ((fdf->map.y * -1 + fdf->map.x) * \
-					fabs(fdf->res.x_scale * cos(ALPHA)));
+					fabs(fdf->res.x_scale * cos(fdf->res.alpha)));
 			coord.start->y = fdf->res.y0 + ((fdf->map.y + fdf->map.x) * \
-					fabs(fdf->res.y_scale * sin(ALPHA)));
+					fabs(fdf->res.y_scale * sin(fdf->res.alpha)));
 			coord.start->z = fdf->map.map[fdf->map.y][fdf->map.x++];
 			coord.final->z = fdf->map.map[fdf->map.y][fdf->map.x];
 			y_axis_draw(&coord, fdf);
@@ -66,19 +66,19 @@ void	y_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA)) \
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha)) \
 					- (fdf->res.z_scale * coord->final->z);
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}
@@ -97,9 +97,9 @@ void	x_axis_algorithm(t_fdf *fdf)
 		while (fdf->map.y < (fdf->txt.nbline - 2))
 		{
 			coord.start->x = fdf->res.x0 + ((fdf->map.y * -1 + fdf->map.x) \
-					* fabs(fdf->res.x_scale * cos(ALPHA)));
+					* fabs(fdf->res.x_scale * cos(fdf->res.alpha)));
 			coord.start->y = fdf->res.y0 + ((fdf->map.y + fdf->map.x) * \
-					fabs(fdf->res.y_scale * sin(ALPHA)));
+					fabs(fdf->res.y_scale * sin(fdf->res.alpha)));
 			coord.start->z = fdf->map.map[fdf->map.y++][fdf->map.x];
 			coord.final->z = fdf->map.map[fdf->map.y][fdf->map.x];
 			x_axis_draw(&coord, fdf);
@@ -115,19 +115,19 @@ void	x_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(ALPHA));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(ALPHA)) \
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha)) \
 					- (fdf->res.z_scale * coord->final->z);
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 18:26:43 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:14:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,25 @@ int	key_hook(int keycode, t_fdf *fdf)
 		mlx_destroy_window(fdf->mlx, fdf->mlx_win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 126)
+	else
 	{
-		printf("Print");
+		if (keycode == UP)
+			fdf->res.z_scale += 2;
+		if (keycode == DOWN)
+			fdf->res.z_scale -= 2;
+		if (keycode == 123)
+			fdf->res.x0 -= 10;
+		if (keycode == 124)
+			fdf->res.x0 += 10;
+		if (keycode == 119)
+			fdf->res.alpha = ISO;
+		if (keycode == 115)
+			fdf->res.alpha = CAV;
+		printf("%d\n", keycode);
+		drawing_process(fdf);
 	}
 	return (0);
 }
-
-/*int	res_hook(int keycode, t_res *res)
-{
-	if (keycode == 126)
-		printf("Hello %f\n", res->y_scale);
-	return (0);
-}*/
 
 int	main(int argc, char **argv)
 {
@@ -66,10 +72,11 @@ int	main(int argc, char **argv)
 	fdf.res.z_scale = 15;
 	fdf.res.x0 = fdf.res.x / 2;
 	fdf.res.y0 = 200;
+	fdf.res.alpha = ISO;
 	window_init(&fdf);
+	scaling_adjustment(&fdf);
 	drawing_process(&fdf);
 	mlx_key_hook(fdf.mlx_win, key_hook, &fdf);
-//	mlx_key_hook(mlx.mlx_win, res_hook, &res);
 	mlx_loop(fdf.mlx);
 	return (1);
 }

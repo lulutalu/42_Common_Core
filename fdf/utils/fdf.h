@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 18:26:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:14:30 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@
 # define RED 0x00C41E3A
 # define BLACK 0x00000000
 # define BLUE 0x004682B4
-# define ALPHA 60
+# define ISO 60
+# define CAV 45
 # define ESC 53
+# define UP 126
+# define DOWN 125
 
 /*
  * Structures for Array
@@ -99,6 +102,7 @@ typedef struct s_res {
 	float	x_scale;
 	float	y_scale;
 	float	z_scale;
+	int		alpha;
 }				t_res;
 
 typedef struct s_fdf {
@@ -155,7 +159,7 @@ void	scaling_adjustment_x0(t_fdf *fdf);
 void	scaling_adjustment(t_fdf *fdf);
 
 /*
- * mlx functions
+ * Drawing functions
 */
 
 void	drawing_process(t_fdf *fdf);
@@ -163,9 +167,15 @@ void	y_axis_draw(t_coord *coord, t_fdf *fdf);
 void	y_axis_algorithm(t_fdf *fdf);
 void	x_axis_draw(t_coord *coord, t_fdf *fdf);
 void	x_axis_algorithm(t_fdf *fdf);
+
+/*
+ * Mlx Functions
+*/
+
 void	window_init(t_fdf *fdf);
 void	print_line(t_coord coord, t_fdf fdf, int color);
 void	my_mlx_pixel_put(t_fdf *fdf, t_line *line, int color);
+void	image_init(t_fdf *fdf);
 
 /*
  * Mlx Hooks
