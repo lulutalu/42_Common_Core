@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 19:14:30 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:53:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@
 # define ESC 53
 # define UP 126
 # define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+# define END 119
+# define HOME 115
+# define PGUP 116
+# define PGDWN 121
+# define PLUS 24
+# define MINUS 27
 
 /*
  * Structures for Array
@@ -140,6 +148,7 @@ void	file_desc_closing(t_file *file);
 void	nl_counter(t_fdf *fdf, t_file file);
 void	array_filling(t_fdf *fdf, t_file file);
 void	int_array(t_fdf *fdf);
+void	int_array_2(t_fdf *fdf);
 
 /*
  * Little Functions
@@ -147,6 +156,7 @@ void	int_array(t_fdf *fdf);
 
 int		color_selection(t_coord coord);
 void	mem_alloc_check(void *ptr);
+void	fdf_init(t_fdf *fdf);
 
 /*
  * Scaling Functions
@@ -181,7 +191,6 @@ void	image_init(t_fdf *fdf);
  * Mlx Hooks
 */
 
-int	key_hook(int keycode, t_fdf *fdf);
-//int	res_hook(int keycode, t_res *res);
+int		key_hook(int keycode, t_fdf *fdf);
 
 #endif

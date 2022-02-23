@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 18:43:33 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:45:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	array_filling(t_fdf *fdf, t_file file)
 	while (fdf->txt.x < (fdf->txt.nbline - 1))
 	{
 		fdf->txt.line = get_next_line(file.fd);
-		fdf->txt.line = ft_dyn_substr(&fdf->txt.line, 0, ft_strlen(fdf->txt.line) - 1);
+		fdf->txt.line = ft_dyn_substr(&fdf->txt.line, \
+				0, ft_strlen(fdf->txt.line) - 1);
 		fdf->txt.array[fdf->txt.x] = ft_calloc(\
 				(ft_strlen(fdf->txt.line) + 1), sizeof(char));
 		mem_alloc_check(fdf->txt.array[fdf->txt.x]);
@@ -85,15 +86,21 @@ void	int_array(t_fdf *fdf)
 		mem_alloc_check(fdf->map.map[fdf->map.x]);
 		fdf->map.nb = 0;
 		fdf->map.y = 0;
-		while (fdf->map.splited[fdf->map.nb])
-		{
-			fdf->map.map[fdf->map.x][fdf->map.y] = ft_atoi(fdf->map.splited[fdf->map.nb]);
-			fdf->map.y++;
-			fdf->map.nb++;
-		}
+		int_array_2(fdf);
 		free(fdf->txt.array[fdf->txt.x]);
 		free(fdf->map.splited);
 		fdf->txt.x++;
 		fdf->map.x++;
+	}
+}
+
+void	int_array_2(t_fdf *fdf)
+{
+	while (fdf->map.splited[fdf->map.nb])
+	{
+		fdf->map.map[fdf->map.x][fdf->map.y] \
+			= ft_atoi(fdf->map.splited[fdf->map.nb]);
+		fdf->map.y++;
+		fdf->map.nb++;
 	}
 }

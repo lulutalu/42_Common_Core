@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:02:11 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/22 19:09:31 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:53:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,25 @@ void	y_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * cos(fdf->res.alpha));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha)) \
-					- (fdf->res.z_scale * coord->final->z);
+		coord->final->x = coord->start->x + fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha)) - (fdf->res.z_scale * coord->final->z);
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}
 }
@@ -115,20 +120,25 @@ void	x_axis_draw(t_coord *coord, t_fdf *fdf)
 {
 	if (coord->start->z == 0 && coord->final->z == 0)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha));
 	}
 	else if (coord->start->z == coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha));
 	}
 	else if (coord->start->z != coord->final->z)
 	{
-		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * cos(fdf->res.alpha));
-		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * sin(fdf->res.alpha)) \
-					- (fdf->res.z_scale * coord->final->z);
+		coord->final->x = coord->start->x - fabs(fdf->res.x_scale * \
+				cos(fdf->res.alpha));
+		coord->final->y = coord->start->y + fabs(fdf->res.y_scale * \
+				sin(fdf->res.alpha)) - (fdf->res.z_scale * coord->final->z);
 		coord->start->y -= fdf->res.z_scale * coord->start->z;
 	}
 }
