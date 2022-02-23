@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/23 16:53:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:36:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fdf_init(t_fdf *fdf)
 	fdf->res.x_scale = 100;
 	fdf->res.y_scale = 100;
 	fdf->res.z_scale = 15;
-	fdf->res.x0 = fdf.res.x / 2;
+	fdf->res.x0 = fdf->res.x / 2;
 	fdf->res.y0 = 200;
 	fdf->res.alpha = ISO;
 }
@@ -46,38 +46,28 @@ int	key_hook(int keycode, t_fdf *fdf)
 			fdf->res.alpha = ISO;
 		if (keycode == HOME)
 			fdf->res.alpha = CAV;
-		if (keycode == PGUP)
-			fdf->res.z_scale += 2;
-		if (keycode == PGDWN)
-			fdf->res.z_scale -= 2;
-		if (keycode == PLUS)
-		{
-			fdf->res.x_scale *= 1.1;
-			fdf->res.y_scale *= 1.1;
-		}
-		if (keycode == MINUS)
-		{
-			fdf->res.x_scale *= 0.9;
-			fdf->res.y_scale *= 0.9;
-		}
+		key_hook_2(keycode, fdf);
 		drawing_process(fdf);
 	}
 	return (0);
 }
 
-int	key_hook_2(int keycode, t_fdf *fdf)
+void	key_hook_2(int keycode, t_fdf *fdf)
 {
-
-
-
-
-
-
-
-
-
-
-
+	if (keycode == PGUP)
+		fdf->res.z_scale += 2;
+	if (keycode == PGDWN)
+		fdf->res.z_scale -= 2;
+	if (keycode == PLUS)
+	{
+		fdf->res.x_scale *= 1.1;
+		fdf->res.y_scale *= 1.1;
+	}
+	if (keycode == MINUS)
+	{
+		fdf->res.x_scale *= 0.9;
+		fdf->res.y_scale *= 0.9;
+	}
 }
 
 int	main(int argc, char **argv)

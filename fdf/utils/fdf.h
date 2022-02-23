@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:43:09 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/23 16:53:36 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:35:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,6 @@ void	image_init(t_fdf *fdf);
 */
 
 int		key_hook(int keycode, t_fdf *fdf);
+void	key_hook_2(int keycode, t_fdf *fdf);
 
 #endif
