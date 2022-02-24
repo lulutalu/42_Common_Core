@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:41:01 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/01/13 22:46:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:28:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "libft.h"
+# include "get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
