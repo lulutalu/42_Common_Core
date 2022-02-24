@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:58:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2021/11/19 12:27:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:24:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-char	*line_return(char **str, int i);
-char	*no_read(char **str);
-char	*buffer_not_empty(char **str, int i);
-char	*read_loop(int fd, char **str);
-void	*ft_bzero(void *s, size_t n);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char **s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(char **s1, int istr);
+char	*gnl_line_return(char **str, int i);
+char	*gnl_no_read(char **str);
+char	*gnl_buffer_not_empty(char **str, int i);
+char	*gnl_read_loop(int fd, char **str);
+void	*gnl_bzero(void *s, size_t n);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strjoin(char **s1, char const *s2);
+char	**gnl_substr(char **substr, char **s, unsigned int start, size_t len);
+char	*gnl_strdup(char **s1, int istr);
 
 #endif
