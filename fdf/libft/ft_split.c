@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 18:22:13 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/23 20:40:40 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:41:35 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,3 +102,13 @@ char	**ft_split(char const *s, char c)
 	}
 	return (res);
 }
+
+/*int	main()
+{
+	char	**split;
+	int		i = 0;
+
+	split = ft_split("0 1 2 3 4 5 6 7 8 9 ", ' ');
+	while (i < 10)
+		free(split[i++]);
+}*/

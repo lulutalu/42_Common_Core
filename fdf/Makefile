@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 14:19:45 by lduboulo          #+#    #+#              #
-#    Updated: 2022/02/20 19:14:52 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/02/23 21:03:10 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ CFLAGS = -Wall -Werror -Wextra -Imlx -D BUFFER_SIZE=1
 
 MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-LLDBFLAGS = -g3 -fsanitize=address,undefined
+LLDBFLAGS = -g3
 
 SRC = ./utils/main.c \
 	  ./utils/get_next_line.c \

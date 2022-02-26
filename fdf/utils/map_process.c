@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:36:10 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/23 20:34:16 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:48:10 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	nl_counter(t_fdf *fdf, t_file file)
 {
 	fdf->txt.nbline = 0;
+	fdf->txt.line = ft_calloc(1, sizeof(char));
 	while (fdf->txt.line != NULL)
 	{
+		free(fdf->txt.line);
 		fdf->txt.line = get_next_line(file.fd);
 		fdf->txt.nbline++;
 	}
-	free(fdf->txt.line);
 }
 
 void	array_filling(t_fdf *fdf, t_file file)
@@ -87,8 +88,8 @@ void	int_array(t_fdf *fdf)
 		fdf->map.nb = 0;
 		fdf->map.y = 0;
 		int_array_2(fdf);
-		free(fdf->txt.array[fdf->txt.x]);
 		free(fdf->map.splited);
+		free(fdf->txt.array[fdf->txt.x]);
 		fdf->txt.x++;
 		fdf->map.x++;
 	}
@@ -100,6 +101,7 @@ void	int_array_2(t_fdf *fdf)
 	{
 		fdf->map.map[fdf->map.x][fdf->map.y] \
 			= ft_atoi(fdf->map.splited[fdf->map.nb]);
+		free(fdf->map.splited[fdf->map.nb]);
 		fdf->map.y++;
 		fdf->map.nb++;
 	}

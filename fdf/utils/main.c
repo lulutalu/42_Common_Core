@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:06:12 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/23 20:36:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:57:23 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int	main(int argc, char **argv)
 	file.argc = argc;
 	arg_check(file);
 	file_desc_opening(&file);
-	fdf.txt.line = ft_calloc(1, sizeof(char));
-	mem_alloc_check(fdf.txt.line);
 	nl_counter(&fdf, file);
 	fdf.txt.array = ft_calloc((fdf.txt.nbline + 1), sizeof(char *));
 	mem_alloc_check(fdf.txt.array);
