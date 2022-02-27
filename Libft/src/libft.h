@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:41:01 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/24 15:28:11 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/27 19:29:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "get_next_line.h"
+# include "ft_printf.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
