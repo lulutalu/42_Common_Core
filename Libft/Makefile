@@ -1,90 +1,72 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile_Bis                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/22 12:50:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/02/24 15:30:05 by lduboulo         ###   ########.fr        #
+#    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
+#    Updated: 2022/02/27 19:08:31 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+#Compiler and Linker
+CC          := gcc
 
-SRC = ft_atoi.c \
-	  ft_bzero.c \
-	  ft_isalnum.c \
-	  ft_isalpha.c \
-	  ft_isascii.c \
-	  ft_isdigit.c \
-	  ft_isprint.c \
-	  ft_memchr.c \
-	  ft_memcmp.c \
-	  ft_memcpy.c \
-	  ft_memmove.c \
-	  ft_memset.c \
-	  ft_strchr.c \
-	  ft_strlcat.c \
-	  ft_strlcpy.c \
-	  ft_strlen.c \
-	  ft_strncmp.c \
-	  ft_strnstr.c \
-	  ft_strrchr.c \
-	  ft_tolower.c \
-	  ft_toupper.c \
-	  ft_calloc.c \
-	  ft_strdup.c \
-	  ft_substr.c \
-	  ft_dyn_substr.c \
-	  ft_strjoin.c \
-	  ft_strtrim.c \
-	  ft_split.c \
-	  ft_itoa.c \
-	  ft_strmapi.c \
-	  ft_striteri.c \
-	  ft_putchar_fd.c \
-	  ft_putstr_fd.c \
-	  ft_putendl_fd.c \
-	  ft_putnbr_fd.c \
-	  ft_itoa_base.c \
-	  ft_putchar_fd_count.c \
-	  ft_putstr_fd_count.c \
-	  ft_putnbr_fd_count.c \
-	  get_next_line.c \
-	  get_next_line_utils.c \
+#The Target Binary Program
+TARGET      := libft.a
 
-SRCBONUS = ft_lstnew.c \
-		   ft_lstadd_front.c \
-		   ft_lstsize.c \
-		   ft_lstlast.c \
-		   ft_lstadd_back.c \
-		   ft_lstdelone.c \
-		   ft_lstclear.c \
-		   ft_lstiter.c \
-		   ft_lstmap.c
+#The Directories, Source, Includes, Objects, Binary and Resources
+SRCDIR      := src
+BUILDDIR    := obj
+SRCEXT      := c
+DEPEXT      := d
+OBJEXT      := o
 
-BONUSOBJ = $(SRCBONUS:.c=.o)
+#Flags, Libraries and Includes
+CFLAGS      := -Wall -Wextra -Werror
+LIB         := ar rcs
 
-OBJECTS = $(SRC:.c=.o)
+#---------------------------------------------------------------------------------
+#DO NOT EDIT BELOW THIS LINE
+#---------------------------------------------------------------------------------
+SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-COMP = gcc -Wextra -Wall -Werror -c
+#Defauilt Make
+all: directories $(TARGET)
 
-LIB = ar rcs
+#Remake
+re: fclean all
 
-all : $(NAME)
+#Make the Directories
+directories:
+	@mkdir -p $(BUILDDIR)
 
-$(NAME) : $(OBJECTS)
-	@$(COMP) $(SRC) && $(LIB) $(NAME) $(OBJECTS)
+fclean: clean
+	@$(RM) -rf $(TARGET)
 
-bonus :
-	@$(COMP) $(SRC) $(SRCBONUS) && $(LIB) $(NAME) $(OBJECTS) $(BONUSOBJ)
+#Clean only Objecst
+clean:
+	@$(RM) -rf $(BUILDDIR)
 
-.PHONY : clean
-clean :
-	@rm -f $(OBJECTS) $(BONUSOBJ)
+#Pull in dependency info for *existing* .o files
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
-fclean : clean
-	@rm -f $(NAME)
+#Link
+$(TARGET): $(OBJECTS)
+	@$(LIB) $(TARGET) $(OBJECTS)
 
-re : fclean all
+#Compile
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+#Non-File Targets
+.PHONY: all re directories clean fclean
+
