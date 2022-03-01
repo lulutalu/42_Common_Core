@@ -6,16 +6,16 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:58:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/27 19:29:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:34:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 2
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2
+# endif
 
 # include "get_next_line.h"
 # include "libft.h"

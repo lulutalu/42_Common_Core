@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/27 23:02:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:18:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
  * Define of Macro
 */
 
-# define NOT_DIGIT "\033[1;31mError, the arguments contain something else than digit\033[0m"
+# define NOT_DIGIT "\033[1;31mError, something else than digits in arg\033[0m"
+# define NBARG "\033[1;31mError, number of arguments is incorrect\033[0m"
+# define NENB "\033[1;31mError, not enough numbers to form a stack\033[0m"
+# define SYN "\033[1;31mError, syntax of arg not correct\033[0m"
 
 #endif

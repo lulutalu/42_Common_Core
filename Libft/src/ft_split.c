@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 18:22:13 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/02/27 19:05:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:33:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (res);
 }
-
-/*int	main()
-{
-	char	**res;
-	int		i = 0;
-
-	res = ft_split("1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9 \n", ' ');
-	while (i < 20)
-		printf("%s\n", res[i++]);
-	free(res);
-}*/

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_Bis                                       :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/02/27 23:00:14 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/01 16:32:25 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,19 +71,19 @@ clean:
 #Link
 $(TARGET): $(OBJECTS)
 	@$(MAKE) -C $(LIBDIR)
-	@$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBDIR)/libft.a
+	@$(CC) $(CFLAGS) $(LLDBFLAGS) -o $(TARGET) $(OBJECTS) $(LIBDIR)/libft.a
 	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(TARGET) executable $(GREY)======================================$(RESET)"
 
 #Compile
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@$(CC) $(CFLAGS) $(LLDBFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(LLDBFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
 	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
 
 #Non-File Targets
-.PHONY: all re directories clean fclean
+.PHONY: all re directories clean fclean debog
 
