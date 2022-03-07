@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   useful_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 22:30:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/07 16:29:34 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/01 23:32:00 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/01 23:32:26 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	error_exit(char *error)
 {
-	check_of_args(argc, argv);
+	ft_putendl_fd(error, 2);
+	exit(EXIT_FAILURE);
 }

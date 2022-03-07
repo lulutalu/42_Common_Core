@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_mem_alloc_check.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 22:30:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/07 16:29:34 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/01 22:38:54 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/06 15:55:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_mem_alloc_check(void *ptr)
 {
-	check_of_args(argc, argv);
+	if (ptr == NULL)
+	{
+		free(ptr);
+		ft_putendl_fd("Error, dynamic allocation failed", 2);
+		exit(EXIT_FAILURE);
+	}
 }

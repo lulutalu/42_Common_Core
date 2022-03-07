@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/01 16:32:25 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/07 17:18:47 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,70 +20,53 @@ RESET	= \033[0m
 
 # COLORS
 
-#Compiler and Linker
-CC          := gcc
+SRCS_DIR	= ./src/
+SRCS_FILES	= argument_check.c argument_check_2.c main.c useful_functions.c
 
-#The Target Binary Program
-TARGET      := push_swap
+SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
-#The Directories, Source, Includes, Objects, Binary and Resources
-SRCDIR      := src
-BUILDDIR    := obj
-LIBDIR		:= Libft
-SRCEXT      := c
-DEPEXT      := d
-OBJEXT      := o
+O_DIR		= ./objs/
 
-#Flags, Libraries and Includes
-CFLAGS      := -Wall -Wextra -Werror
-LLDBFLAGS	:= -g3 -fsanitize=address,undefined
+OBJS_FILES	:= ${SRCS_FILES:.c=.o}
+OBJS		:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
 
-#---------------------------------------------------------------------------------
-#DO NOT EDIT BELOW THIS LINE
-#---------------------------------------------------------------------------------
-SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-#Defauilt Make
-all: directories $(TARGET)
+LIBFT		= ./libft
+MAKELIB		= ${MAKE} -C ${LIBFT}
 
-#Remake
-re: fclean all
+NAME		= push_swap
 
-#Make the Directories
-directories:
-	@mkdir -p $(BUILDDIR)
+CC			= gcc
+AR			= ar rcs
+MKDIR		= mkdir
+RM			= rm -f
 
-fclean: clean
-	@$(MAKE) -C $(LIBDIR) fclean
-	@$(RM) -rf $(TARGET)
-	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET)$(TARGET) executable $(GREY)======================================$(RESET)"
+CFLAGS		= -Wall -Wextra -Werror -g3
 
-#Clean only Objecst
-clean:
-	@$(MAKE) -C $(LIBDIR) clean
-	@$(RM) -rf $(BUILDDIR)
-	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET)$(TARGET) objects files $(GREY)===================================$(RESET)"
 
-#Pull in dependency info for *existing* .o files
--include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
+all:		${NAME}
 
-#Link
-$(TARGET): $(OBJECTS)
-	@$(MAKE) -C $(LIBDIR)
-	@$(CC) $(CFLAGS) $(LLDBFLAGS) -o $(TARGET) $(OBJECTS) $(LIBDIR)/libft.a
-	@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(TARGET) executable $(GREY)======================================$(RESET)"
+${NAME}:	${O_DIR} ${OBJS}
+			@${MAKELIB}
+			@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBFT}/libft.a
+			@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(NAME) executable $(GREY)======================$(RESET)"
 
-#Compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(LLDBFLAGS) $(INC) -c -o $@ $<
-	@$(CC) $(CFLAGS) $(LLDBFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
-	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
-	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
-	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
-	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+${O_DIR}:
+			${MKDIR} ${O_DIR}
 
-#Non-File Targets
-.PHONY: all re directories clean fclean debog
+${O_DIR}%.o:${SRCS_DIR}%.c
+			${CC} ${FLAGS} -o $@ -c $<
 
+clean :
+	@$(MAKE) -C Libft clean
+	@rm -rf $(O_DIR)
+	@echo "$(GREY)====================$(ORANGE) [Deleted] : $(RESET).o files $(GREY)================================$(RESET)"
+
+fclean : clean
+	@$(MAKE) -C Libft fclean
+	@rm -rf $(NAME) $(NAME).dSYM
+	@echo "$(GREY)====================$(RED) [Deleted] : $(RESET) everything $(GREY)=============================$(RESET)"
+
+re : fclean all
+
+.PHONY : all clean fclean re
