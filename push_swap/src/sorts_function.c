@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sorts_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 22:30:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 14:47:22 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/07 23:41:22 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/08 14:47:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	swap_stack(t_node **head)
 {
-	t_double	dl;
-	t_node		*ahead;
+	t_node	*first;
+	t_node	*second;
 
-	dl = check_of_args(argc, argv);
-	ahead = NULL;
-	dl.y = 0;
-	while (dl.y < dl.ymax)
-		lst_add(&ahead, dl.tab[dl.y++]);
-	//stack_visualisation(&ahead);
-	swap_stack(&ahead);
-	//stack_visualisation(&ahead);
+	printf("%d\n", (*head)->next->next->value);
+	first = *head;
+	second = (*head)->next;
+	second->next = first;
+	second->prev = NULL;
+	(*head) = second;
+	first->prev = (*head);
+	first->next = (*head)->next->next;
+	printf("%d %d\n", first->value, second->value);
+	printf("%d %d %d\n", (*head)->value, (*head)->next->value, (*head)->next->next->value);
 }

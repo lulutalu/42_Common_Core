@@ -6,15 +6,15 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:38:46 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/06 16:13:16 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:55:09 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_of_args(int argc, char **argv)
+t_double	check_of_args(int argc, char **argv)
 {
-	t_arg	args;
+	t_arg		args;
 
 	args.iarg = 1;
 	args.narg = 0;
@@ -23,13 +23,13 @@ void	check_of_args(int argc, char **argv)
 	else
 	{
 		if (argc == 2)
-			check_of_arg_2(&args, argv);
+			return (check_of_arg_2(&args, argv));
 		else
-			check_of_arg_n(&args, argc, argv);
+			return (check_of_arg_n(&args, argc, argv));
 	}
 }
 
-void	check_of_arg_2(t_arg *args, char **argv)
+t_double	check_of_arg_2(t_arg *args, char **argv)
 {
 	args->arg = argv[1];
 	args->i = 0;
@@ -51,10 +51,10 @@ void	check_of_arg_2(t_arg *args, char **argv)
 	}
 	if (args->narg < 2)
 		error_exit(NENB);
-	double_arg_2(argv);
+	return (double_arg_2(argv));
 }
 
-void	check_of_arg_n(t_arg *args, int argc, char **argv)
+t_double	check_of_arg_n(t_arg *args, int argc, char **argv)
 {
 	while (args->iarg < argc)
 	{
@@ -68,10 +68,10 @@ void	check_of_arg_n(t_arg *args, int argc, char **argv)
 		}
 		args->iarg++;
 	}
-	double_arg_n(argc, argv);
+	return (double_arg_n(argc, argv));
 }
 
-void	double_arg_2(char **argv)
+t_double	double_arg_2(char **argv)
 {
 	t_double	dl;
 
@@ -90,6 +90,7 @@ void	double_arg_2(char **argv)
 	}
 	free(dl.split);
 	double_arg_tab_check(&dl);
+	return (dl);
 }
 
 void	double_arg_tab_check(t_double *dl)
@@ -109,5 +110,4 @@ void	double_arg_tab_check(t_double *dl)
 			error_exit(DOUBLE);
 		dl->y++;
 	}
-	free(dl->tab);
 }

@@ -6,13 +6,14 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:41:01 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/01 23:39:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/07 23:27:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "./../../src/push_swap.h"
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
@@ -26,7 +27,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}					t_list;
+}				t_list;
 
 void	*ft_bzero(void *s, size_t n);
 int		ft_isalpha(int c);

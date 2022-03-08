@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/06 16:13:18 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:47:21 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,43 @@ typedef struct s_double
 	int		cp;
 }			t_double;
 
+typedef struct s_node
+{
+	int				value;
+	struct s_node	*next;
+	struct s_node	*prev;
+}				t_node;
+
 /*
  * Functions for Arg checking
 */
 
-void	check_of_args(int argc, char **argv);
-void	check_of_arg_2(t_arg *args, char **argv);
-void	check_of_arg_n(t_arg *args, int argc, char **argv);
-void	double_arg_2(char **argv);
-void	double_arg_n(int argc, char **argv);
-void	double_arg_tab_check(t_double *dl);
+t_double	check_of_args(int argc, char **argv);
+t_double	check_of_arg_2(t_arg *args, char **argv);
+t_double	check_of_arg_n(t_arg *args, int argc, char **argv);
+t_double	double_arg_2(char **argv);
+t_double	double_arg_n(int argc, char **argv);
+void		double_arg_tab_check(t_double *dl);
 
 /*
  * Function for exit and error
 */
 
-int		error_exit(char *error);
+int			error_exit(char *error);
+
+/*
+ * Linked list manipulation
+*/
+
+void		lst_add(t_node **head, int value);
+t_node		*find_last(t_node **head);
+
+/*
+ * Sorting Algorithm Functions
+*/
+
+int			check_sort(t_node **head);
+void		stack_visualisation(t_node **head);
+void		swap_stack(t_node **head);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/07 17:18:47 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/07 23:49:41 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ RESET	= \033[0m
 # COLORS
 
 SRCS_DIR	= ./src/
-SRCS_FILES	= argument_check.c argument_check_2.c main.c useful_functions.c
+SRCS_FILES	= argument_check.c argument_check_2.c main.c useful_functions.c \
+			  linked_list_manipulation.c sorts_function.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
@@ -48,14 +49,14 @@ all:		${NAME}
 
 ${NAME}:	${O_DIR} ${OBJS}
 			@${MAKELIB}
-			@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBFT}/libft.a
+			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}/libft.a
 			@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(NAME) executable $(GREY)======================$(RESET)"
 
 ${O_DIR}:
 			${MKDIR} ${O_DIR}
 
 ${O_DIR}%.o:${SRCS_DIR}%.c
-			${CC} ${FLAGS} -o $@ -c $<
+			${CC} ${CFLAGS} -I ./Libft/src/ -o $@ -c $<
 
 clean :
 	@$(MAKE) -C Libft clean
