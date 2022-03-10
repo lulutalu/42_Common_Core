@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 14:47:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:40:09 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_node		*find_last(t_node **head);
 
 int			check_sort(t_node **head);
 void		stack_visualisation(t_node **head);
-void		swap_stack(t_node **head);
+void		swap_stack(t_node **head, char stack);
+void		rotate_stack(t_node **head, char stack);
+void		reverse_rotate_stack(t_node **head, char stack);
 
 #endif

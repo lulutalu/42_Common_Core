@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:32:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 14:16:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:15:36 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	stack_visualisation(t_node **head)
 		printf("    %d\n", cur->value);
 		cur = cur->next;
 	}
+	printf("---------------------------------\n");
 }
