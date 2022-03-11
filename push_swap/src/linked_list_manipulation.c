@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:30:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 14:47:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/11 21:45:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,32 @@ t_node	*find_last(t_node **head)
 	while (cur->next != NULL)
 		cur = cur->next;
 	return (cur);
+}
+
+void	linked_list_circle(t_node **head)
+{
+	t_node	*cur;
+
+	if ((*head)->prev == NULL)
+	{
+		cur = *head;
+		while (cur->next != NULL)
+			cur = cur->next;
+		cur->next = *head;
+		(*head)->prev = cur;
+	}
+}
+
+void	linked_list_linear(t_node **head)
+{
+	t_node	*cur;
+
+	if ((*head)->prev != NULL)
+	{
+		cur = *head;
+		while (cur->next != *head)
+			cur = cur->next;
+		cur->next = NULL;
+		(*head)->prev = NULL;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:38:46 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 13:55:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/11 21:19:29 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ t_double	check_of_arg_2(t_arg *args, char **argv)
 		if (args->arg[args->i] == 32 && args->arg[args->i - 1] == 32)
 			error_exit(SYN);
 		if (!(args->arg[args->i] >= 48 && args->arg[args->i] <= 57) && \
-				args->arg[args->i] != 32 && args->arg[args->i] != '\0')
+				args->arg[args->i] != 32 && args->arg[args->i] != '\0' \
+				&& args->arg[args->i] != 45)
 			error_exit(NOT_DIGIT);
 		args->i++;
 	}
@@ -62,7 +63,7 @@ t_double	check_of_arg_n(t_arg *args, int argc, char **argv)
 		args->i = 0;
 		while (args->arg[args->i])
 		{
-			if (ft_isdigit(args->arg[args->i]) == 0)
+			if (ft_isdigit(args->arg[args->i]) == 0 && args->arg[args->i] != 45)
 				error_exit(NOT_DIGIT);
 			args->i++;
 		}

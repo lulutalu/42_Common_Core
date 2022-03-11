@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 23:41:22 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 19:39:42 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/11 22:43:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	swap_stack(t_node **head, char stack)
 	t_node	*cur;
 	t_node	*next;
 
+	if ((*head)->prev != NULL)
+		linked_list_linear(head);
 	cur = *head;
 	next = cur->next;
 	cur->next = next->next;
@@ -32,6 +34,8 @@ void	rotate_stack(t_node **head, char stack)
 	t_node	*scd;
 	t_node	*cur;
 
+	if ((*head)->prev != NULL)
+		linked_list_linear(head);
 	cur = *head;
 	scd = (*head)->next;
 	scd->prev = NULL;
@@ -49,6 +53,8 @@ void	reverse_rotate_stack(t_node **head, char stack)
 	t_node	*cur;
 	t_node	*last;
 
+	if ((*head)->prev != NULL)
+		linked_list_linear(head);
 	cur = *head;
 	while (cur->next != NULL)
 		cur = cur->next;

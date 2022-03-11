@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/08 19:40:09 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/12 00:04:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_double
 typedef struct s_node
 {
 	int				value;
+	int				pos;
 	struct s_node	*next;
 	struct s_node	*prev;
 }				t_node;
@@ -79,10 +80,13 @@ t_double	double_arg_n(int argc, char **argv);
 void		double_arg_tab_check(t_double *dl);
 
 /*
- * Function for exit and error
+ * QOL Functions
 */
 
 int			error_exit(char *error);
+void		stack_visualisation(t_node **a, t_node **b);
+t_node		*mini_value(t_node **head);
+void		value_listing(t_node **head, int argc);
 
 /*
  * Linked list manipulation
@@ -90,15 +94,26 @@ int			error_exit(char *error);
 
 void		lst_add(t_node **head, int value);
 t_node		*find_last(t_node **head);
+void		linked_list_circle(t_node **head);
+void		linked_list_linear(t_node **head);
+
+/*
+ * Sorting Algorithm Extra Functions
+*/
+
+int			check_sort(t_node **head);
+void		swap_stack(t_node **head, char stack);
+void		rotate_stack(t_node **head, char stack);
+void		reverse_rotate_stack(t_node **head, char stack);
+int			push_stack_a(t_node **a, t_node **b);
+void		push_stack_a_2(t_node **a, t_node **cur);
+int			push_stack_b(t_node **a, t_node **b);
+void		push_stack_b_2(t_node **b, t_node **cur);
 
 /*
  * Sorting Algorithm Functions
 */
 
-int			check_sort(t_node **head);
-void		stack_visualisation(t_node **head);
-void		swap_stack(t_node **head, char stack);
-void		rotate_stack(t_node **head, char stack);
-void		reverse_rotate_stack(t_node **head, char stack);
+void		n_3_sort(t_node **head);
 
 #endif
