@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 00:04:05 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/12 17:38:42 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		push_stack_b_2(t_node **b, t_node **cur);
  * Sorting Algorithm Functions
 */
 
-void		n_3_sort(t_node **head);
+void		n_3_sort(t_node **head, int pmax);
+void		n_5_sort(t_node **a, t_node **b, int ymax);
 
 #endif
