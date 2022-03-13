@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:06:51 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 17:38:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/13 22:04:50 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,6 @@ void	n_5_sort(t_node **a, t_node **b, int ymax)
 	while (*b != NULL)
 		push_stack_a(a, b);
 }
+
+t_node	*find_biggest_value(t_node **head)
+

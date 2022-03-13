@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 17:38:42 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/13 22:04:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int			error_exit(char *error);
 void		stack_visualisation(t_node **a, t_node **b);
 t_node		*mini_value(t_node **head);
 void		value_listing(t_node **head, int argc);
+int			invert_check_sort(t_node **head);
 
 /*
  * Linked list manipulation
 */
 
 void		lst_add(t_node **head, int value);
-t_node		*find_last(t_node **head);
 void		linked_list_circle(t_node **head);
 void		linked_list_linear(t_node **head);
 

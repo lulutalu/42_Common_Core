@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 23:41:22 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 16:39:02 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/13 20:53:41 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,14 @@ void	rotate_stack(t_node **head, char stack)
 void	reverse_rotate_stack(t_node **head, char stack)
 {
 	t_node	*cur;
-	t_node	*last;
 
-	if ((*head)->prev != NULL)
-		linked_list_linear(head);
+	if ((*head)->prev == NULL)
+		linked_list_circle(head);
+	*head = (*head)->prev;
 	cur = *head;
-	while (cur->next != NULL)
+	while (cur->next != *head)
 		cur = cur->next;
-	last = cur;
-	last->prev->next = NULL;
-	last->prev = NULL;
-	last->next = *head;
-	*head = last;
+	cur->next = NULL;
+	(*head)->prev = NULL;
 	ft_printf("rr%c\n", stack);
 }

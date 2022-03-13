@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:32:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 16:44:57 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/13 21:48:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,24 @@ int	check_sort(t_node **head)
 		else
 			return (0);
 	}
-	if (cur->next == NULL)
-		return (1);
-	else
-		return (0);
+	return (1);
+}
+
+int	invert_check_sort(t_node **head)
+{
+	t_node	*cur;
+	int		temp;
+
+	cur = *head;
+	while (cur->next != NULL)
+	{
+		temp = cur->value;
+		if (temp > cur->next->value)
+			cur = cur->next;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 void	stack_visualisation(t_node **a, t_node **b)
