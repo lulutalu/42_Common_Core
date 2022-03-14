@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 22:30:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/13 22:04:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 23:48:16 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ int	main(int argc, char **argv)
 	t_double	dl;
 	t_node		*ahead;
 	t_node		*bhead;
-	int			temp;
 	int			i;
-	t_node		*acur;
-	t_node		*bcur;
-	t_node		*big;
-	t_node		*curbig;
+	t_proc		bproc;
+	t_proc		aproc;
 
 	dl = check_of_args(argc, argv);
 	ahead = NULL;
@@ -40,76 +37,214 @@ int	main(int argc, char **argv)
 		n_5_sort(&ahead, &bhead, dl.ymax);
 	else
 	{
-//		stack_visualisation(&ahead, &bhead);
+		//////////////////////////////////////////////////
 		i = 1;
 		while (i++ <= dl.ymax / 2)
 			push_stack_b(&ahead, &bhead);
-//		stack_visualisation(&ahead, &bhead);	
-		bcur = bhead;
-		big = bcur;
-		i = 0;
-		temp = 0;
-		while (bcur != NULL) //find the biggest pos of all
-		{
-			if (bcur->pos > bbig->pos)
-			{
-				bbig = bcur;
-				temp = i;
-			}
-			i++;
-			bcur = bcur->next;
-		}
-		linked_list_circle(&bhead);
-		bcur = bhead;
-		while (bcur->prev->pos != big->pos) //bring the biggest at the end
-		{
-			if (temp <= dl.ymax / 4)
-				rotate_stack(&bhead, 'b');
-			else
-				reverse_rotate_stack(&bhead, 'b');
-			linked_list_circle(&bhead);
-			bcur = bhead;
-		}
+		/////////////////////////////////////////////////
+		find_mini_value(&ahead, &aproc);
+		find_biggest_value(&bhead, &bproc);
 //		stack_visualisation(&ahead, &bhead);
-		linked_list_linear(&bhead);
-		while (invert_check_sort(&bhead) == 0)
+		linked_list_circle(&bhead);
+		linked_list_circle(&ahead);
+		while (bhead->prev->pos != bproc.aim->pos || ahead->prev->pos != aproc.aim->pos)
 		{
-			i = 0;
-			curbig = bhead;
-			bcur = bhead;
-			while (bcur != NULL) //find the biggest of not process values
+			if (bhead->prev->pos != bproc.aim->pos && ahead->prev->pos != aproc.aim->pos)
 			{
-				if (bcur->pos > curbig->pos && bcur->pos < big->pos)
-					curbig = bcur;
-				bcur = bcur->next;
-				i++;
+				if (bproc.temp <= dl.ymax / 4 && aproc.temp <= dl.ymax / 4)
+					rotate_both(&ahead, &bhead);
+				else if (bproc.temp > dl.ymax / 4 && aproc.temp > dl.ymax / 4)
+					reverse_rotate_both(&ahead, &bhead);
+				else if (bproc.temp <= dl.ymax / 4 && aproc.temp > dl.ymax / 4)
+				{
+					rotate_stack(&bhead, 'b');
+					reverse_rotate_stack(&ahead, 'a');
+				}
+				else if (bproc.temp > dl.ymax / 4 && aproc.temp <= dl.ymax / 4)
+				{
+					reverse_rotate_stack(&bhead, 'b');
+					rotate_stack(&ahead, 'a');
+				}
 			}
-			if (i <= dl.ymax / 4)
+			else if (bhead->prev->pos == bproc.aim->pos)
 			{
-				while (bhead->pos != curbig->pos)
-             		rotate_stack(&bhead, 'b');
+				if (aproc.temp <= dl.ymax / 4)
+					rotate_stack(&ahead, 'a');
+				else
+					reverse_rotate_stack(&ahead, 'a');
 			}
-			else
+			else if (ahead->prev->pos == aproc.aim->pos)
 			{
-				while (bhead->pos != curbig->pos)
+				if (bproc.temp <= dl.ymax / 4)
+					rotate_stack(&bhead, 'b');
+				else
 					reverse_rotate_stack(&bhead, 'b');
 			}
-			if (curbig->next->pos == big->pos)
-				swap_stack(&bhead, 'b');	
-			else
-			{
-				while (bhead->next->pos != big->pos)
-				{
-					swap_stack(&bhead, 'b');
-					rotate_stack(&bhead, 'b');
-				}
-				swap_stack(&bhead, 'b');	
-			}
-			big = curbig;
-			reverse_rotate_stack(&bhead, 'b');
-			reverse_rotate_stack(&bhead, 'b');
 //			stack_visualisation(&ahead, &bhead);
+			linked_list_circle(&bhead);
+			linked_list_circle(&ahead);
 		}
+		///////////////////////////////////////////////////////////////////////////
+		linked_list_linear(&bhead);
+		linked_list_linear(&ahead);
+//		while (invert_check_sort(&bhead) == 0 || check_sort(&ahead) == 0)
+		i = 1;
+		while (i-- > 0)
+		{
+			stack_visualisation(&ahead, &bhead);
+			linked_list_linear(&ahead);
+			linked_list_linear(&bhead);
+			find_next_big(&bhead, &bproc);
+			find_next_mini(&ahead, &aproc);
+			printf("Aim for a : %d\n Aim for b : %d\n", aproc.curaim->value, bproc.curaim->value);
+			printf("a : %d\n b : %d\n", aproc.temp, bproc.temp);
+			if (bproc.temp <= dl.ymax / 4 && aproc.temp <= dl.ymax / 4)
+			{
+				while (bhead->pos != bproc.curaim->pos && ahead->pos != aproc.curaim->pos)
+             		rotate_both(&ahead, &bhead);
+				if (bhead->pos == bproc.curaim->pos)
+				{
+					while (ahead->pos != aproc.curaim->pos)
+						rotate_stack(&ahead, 'a');
+				}
+				if (ahead->pos == bproc.curaim->pos)
+				{
+					while (bhead->pos != bproc.curaim->pos)
+						rotate_stack(&bhead, 'b');
+				}
+				stack_visualisation(&ahead, &bhead);
+			}
+			else if (bproc.temp > dl.ymax / 4 && aproc.temp > dl.ymax / 4)
+			{
+				while (bhead->pos != bproc.curaim->pos && ahead->pos != aproc.curaim->pos)
+					reverse_rotate_both(&ahead, &bhead);
+				if (bhead->pos == bproc.curaim->pos)
+				{
+					while (ahead->pos != aproc.curaim->pos)
+						reverse_rotate_stack(&ahead, 'a');
+				}
+				if (ahead->pos == aproc.curaim->pos)
+				{
+					while (bhead->pos != bproc.curaim->pos)
+						reverse_rotate_stack(&bhead, 'b');
+				}
+				stack_visualisation(&ahead, &bhead);
+			}
+			else if (bproc.temp <= dl.ymax / 4 && aproc.temp > dl.ymax / 4)
+			{
+				while (bhead->pos != bproc.curaim->pos && ahead->pos != aproc.curaim->pos)
+				{
+					rotate_stack(&bhead, 'b');
+					reverse_rotate_stack(&ahead, 'a');
+				}
+				if (bhead->pos == bproc.curaim->pos)
+				{
+					while (ahead->pos != aproc.curaim->pos)
+						reverse_rotate_stack(&ahead, 'a');
+				}
+				if (ahead->pos == aproc.curaim->pos)
+				{
+					while (bhead->pos != bproc.curaim->pos)
+						rotate_stack(&bhead, 'b');
+				}
+				stack_visualisation(&ahead, &bhead);
+			}
+			else if (bproc.temp > dl.ymax / 4 && aproc.temp <= dl.ymax / 4)
+			{
+				while (bhead->pos != bproc.curaim->pos && ahead->pos != aproc.curaim->pos)
+				{
+					reverse_rotate_stack(&bhead, 'b');
+					rotate_stack(&ahead, 'a');
+				}
+				if (bhead->pos == bproc.curaim->pos)
+				{
+					while (ahead->pos != aproc.curaim->pos)
+						rotate_stack(&ahead, 'a');
+				}
+				if (ahead->pos == aproc.curaim->pos)
+				{
+					while (bhead->pos != bproc.curaim->pos)
+						reverse_rotate_stack(&bhead, 'b');
+				}
+				stack_visualisation(&ahead, &bhead);
+			}	
+			if (bhead->pos == bproc.curaim->pos && ahead->pos == aproc.curaim->pos)
+			{
+				while (bhead->next->pos != bproc.aim->pos && ahead->next->pos != aproc.aim->pos)
+				{
+					swap_both(&ahead, &bhead);
+					rotate_both(&ahead, &bhead);
+				}
+				if (bhead->next->pos == bproc.aim->pos)
+				{
+					while (ahead->next->pos != aproc.aim->pos)
+					{
+						swap_stack(&ahead, 'a');
+						rotate_stack(&ahead, 'a');
+					}
+				}
+				else if (ahead->next->pos == aproc.aim->pos)
+				{
+					while (bhead->next->pos != bproc.aim->pos)
+					{
+						swap_stack(&bhead, 'b');
+						rotate_stack(&bhead, 'b');
+					}
+				}
+				stack_visualisation(&ahead, &bhead);
+				swap_both(&ahead, &bhead);
+			}
+			bproc.aim = bproc.curaim;
+			aproc.aim = aproc.curaim;
+			/*find_lst(&ahead, aproc.limit, &aproc);
+			find_lst(&bhead, bproc.limit, &bproc);
+			if (aproc.i <= dl.ymax / 4 && bproc.i <= dl.ymax / 4)
+			{
+				while (ahead != aproc.limit && bhead != bproc.limit)
+					rotate_both(&ahead, &bhead);
+				if (ahead == aproc.limit)
+				{
+					while (bhead != bproc.limit)
+						rotate_stack(&bhead, 'b');
+				}
+				if (bhead == bproc.limit)
+				{
+					while (ahead != aproc.limit)
+						rotate_stack(&ahead, 'a');
+				}
+			}
+			else if (aproc.i > dl.ymax / 4 && bproc.i > dl.ymax / 4)
+			{
+				while (ahead != aproc.limit && bhead != bproc.limit)
+					reverse_rotate_both(&ahead, &bhead);
+				if (ahead == aproc.limit)
+				{
+					while (bhead != bproc.limit)
+						reverse_rotate_stack(&bhead, 'b');
+				}
+				if (bhead == bproc.limit)
+				{
+					while (ahead != aproc.limit)
+						reverse_rotate_stack(ahead, 'a');
+				}
+			}
+			else if (aproc.i > dl.ymax / 4 && bproc.i <= dl.ymax / 4)
+			{
+				while (
+			}*/
+			stack_visualisation(&ahead, &bhead);
+		}
+//		stack_visualisation(&ahead, &bhead);
+		/////////////////////////////////////////////////////////////
+/*		while (bhead != NULL)
+		{
+			if (bhead->pos > ahead->pos)
+			{
+				push_stack_a(&ahead, &bhead);
+				rotate_stack(&ahead, 'a');
+			}
+			else if (bhead->pos < ahead->pos)
+		}*/
 	}
 	if (bhead == NULL)
 		return (check_sort(&ahead));

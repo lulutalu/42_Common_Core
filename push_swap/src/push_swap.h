@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/13 22:04:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 23:48:15 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ typedef struct s_node
 	struct s_node	*prev;
 }				t_node;
 
+typedef struct s_proc
+{
+	int		temp;
+	int		i;
+	t_node	*aim;
+	t_node	*curaim;
+	t_node	*limit;
+}				t_proc;
+
 /*
  * Functions for Arg checking
 */
@@ -96,17 +105,26 @@ int			invert_check_sort(t_node **head);
 void		lst_add(t_node **head, int value);
 void		linked_list_circle(t_node **head);
 void		linked_list_linear(t_node **head);
+void		find_lst(t_node **head, t_node *needle, t_proc *proc);
 
 /*
  * Sorting Algorithm Extra Functions
 */
 
 int			check_sort(t_node **head);
+////////////////////////////////////////////////////////////
 void		swap_stack(t_node **head, char stack);
+void		swap_both(t_node **a, t_node **b);
+///////////////////////////////////////////////////////////
 void		rotate_stack(t_node **head, char stack);
+void		rotate_both(t_node **a, t_node **b);
+//////////////////////////////////////////////////////////
 void		reverse_rotate_stack(t_node **head, char stack);
+void		reverse_rotate_both(t_node **a, t_node **b);
+/////////////////////////////////////////////////////////
 int			push_stack_a(t_node **a, t_node **b);
 void		push_stack_a_2(t_node **a, t_node **cur);
+/////////////////////////////////////////////////////////
 int			push_stack_b(t_node **a, t_node **b);
 void		push_stack_b_2(t_node **b, t_node **cur);
 
@@ -116,5 +134,9 @@ void		push_stack_b_2(t_node **b, t_node **cur);
 
 void		n_3_sort(t_node **head, int pmax);
 void		n_5_sort(t_node **a, t_node **b, int ymax);
+void		find_biggest_value(t_node **head, t_proc *proc);
+void		find_next_big(t_node **head, t_proc *proc);
+void		find_mini_value(t_node **head, t_proc *proc);
+void		find_next_mini(t_node **head, t_proc *proc);
 
 #endif

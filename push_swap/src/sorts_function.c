@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 23:41:22 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/13 20:53:41 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 22:49:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	swap_stack(t_node **head, char stack)
 	next->next = cur;
 	next->prev = NULL;
 	*head = next;
-	ft_printf("s%c\n", stack);
+	if (stack != 's')
+		ft_printf("s%c\n", stack);
 }
 
 void	rotate_stack(t_node **head, char stack)
@@ -45,7 +46,15 @@ void	rotate_stack(t_node **head, char stack)
 	(*head)->prev = cur;
 	(*head)->next = NULL;
 	*head = scd;
-	ft_printf("r%c\n", stack);
+	if (stack != 'r')
+		ft_printf("r%c\n", stack);
+}
+
+void	rotate_both(t_node **a, t_node **b)
+{
+	rotate_stack(a, 'r');
+	rotate_stack(b, 'r');
+	ft_printf("rr\n");
 }
 
 void	reverse_rotate_stack(t_node **head, char stack)
@@ -60,5 +69,13 @@ void	reverse_rotate_stack(t_node **head, char stack)
 		cur = cur->next;
 	cur->next = NULL;
 	(*head)->prev = NULL;
-	ft_printf("rr%c\n", stack);
+	if (stack != 'r')
+		ft_printf("rr%c\n", stack);
+}
+
+void	reverse_rotate_both(t_node **a, t_node **b)
+{
+	reverse_rotate_stack(a, 'r');
+	reverse_rotate_stack(b, 'r');
+	ft_printf("rrr\n");
 }

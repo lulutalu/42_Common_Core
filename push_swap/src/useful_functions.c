@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:32:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/13 21:48:48 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 23:48:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@ int	error_exit(char *error)
 
 int	check_sort(t_node **head)
 {
+	t_proc	check;
 	t_node	*cur;
-	int		temp;
 
+	find_mini_value(head, &check);
+	linked_list_circle(head);
 	cur = *head;
-	while (cur->next != NULL)
+	while (cur != check.limit)
+		cur = cur->next;
+	while (cur->next != check.limit)
 	{
-		temp = cur->value;
-		if (temp < cur->next->value)
+		if (cur->value < cur->next->value)
 			cur = cur->next;
 		else
 			return (0);
@@ -38,13 +41,16 @@ int	check_sort(t_node **head)
 int	invert_check_sort(t_node **head)
 {
 	t_node	*cur;
-	int		temp;
+	t_proc	check;
 
+	find_biggest_value(head, &check);
+	linked_list_circle(head);
 	cur = *head;
-	while (cur->next != NULL)
+	while (cur != check.limit)
+		cur = cur->next;
+	while (cur->next != check.limit)
 	{
-		temp = cur->value;
-		if (temp > cur->next->value)
+		if (cur->value > cur->next->value)
 			cur = cur->next;
 		else
 			return (0);

@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/13 18:07:38 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/14 21:58:35 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RESET	= \033[0m
 SRCS_DIR	= ./src/
 SRCS_FILES	= argument_check.c argument_check_2.c main.c useful_functions.c \
 			  linked_list_manipulation.c sorts_function.c algorithm_functions.c \
-			  sorts_functions_2.c 
+			  sorts_functions_2.c algorithm_functions_2.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

@@ -6,11 +6,18 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 22:32:38 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/12 00:04:06 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 22:47:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	swap_both(t_node **a, t_node **b)
+{
+	swap_stack(a, 's');
+	swap_stack(b, 's');
+	ft_printf("ss\n");
+}
 
 int	push_stack_b(t_node **a, t_node **b)
 {

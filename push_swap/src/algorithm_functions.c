@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:06:51 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/13 22:04:50 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/14 23:48:13 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,64 @@ void	n_5_sort(t_node **a, t_node **b, int ymax)
 		push_stack_a(a, b);
 }
 
-t_node	*find_biggest_value(t_node **head)
+void	find_biggest_value(t_node **head, t_proc *proc)
+{
+	t_node	*cur;
 
+	proc->aim = *head;
+	proc->i = 0;
+	proc->temp = 0;
+	cur = *head;
+	while (cur != NULL)
+	{
+		if (cur->pos > proc->aim->pos)
+		{
+			proc->aim = cur;
+			proc->temp = proc->i;
+		}
+		proc->i++;
+		cur = cur->next;
+	}
+	proc->limit = proc->aim;
+}
+
+void	find_next_big(t_node **head, t_proc *proc)
+{
+	t_node	*cur;
+
+	proc->i = 1;
+	proc->temp = 1;
+	proc->curaim = proc->aim->prev;
+	cur = *head;
+	while (cur != NULL)
+	{
+		if (cur->pos > proc->curaim->pos && cur->pos < proc->aim->pos)
+		{
+			proc->curaim = cur;
+			proc->temp = proc->i;
+		}
+		cur = cur->next;
+		proc->i++;
+	}
+}
+
+void	find_mini_value(t_node **head, t_proc *proc)
+{
+	t_node	*cur;
+
+	proc->aim = *head;
+	proc->i = 0;
+	proc->temp = 0;
+	cur = *head;
+	while (cur != NULL)
+	{
+		if (cur->pos < proc->aim->pos)
+		{
+			proc->aim = cur;
+			proc->temp = proc->i;
+		}
+		proc->i++;
+		cur = cur->next;
+	}
+	proc->limit = proc->aim;
+}
