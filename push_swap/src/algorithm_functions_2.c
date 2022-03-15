@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:52:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/14 23:32:23 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:33:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	find_next_mini(t_node **head, t_proc *proc)
 
 	proc->i = 1;
 	proc->temp = 1;
+	linked_list_circle(head);
+	proc->curaim = proc->aim->next;
+	linked_list_linear(head);
 	cur = *head;
 	while (cur != NULL)
 	{
@@ -29,6 +32,10 @@ void	find_next_mini(t_node **head, t_proc *proc)
 		proc->i++;
 		cur = cur->next;
 	}
+	linked_list_circle(head);
+	if (proc->curaim == proc->aim->next)
+		find_lst(head, proc->curaim, proc);
+	linked_list_linear(head);
 }
 
 void	find_lst(t_node **head, t_node *needle, t_proc *proc)
@@ -42,4 +49,5 @@ void	find_lst(t_node **head, t_node *needle, t_proc *proc)
 		cur = cur->next;
 		proc->i++;
 	}
+	proc->temp = proc->i;
 }

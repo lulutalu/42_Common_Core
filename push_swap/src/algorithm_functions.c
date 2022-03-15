@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:06:51 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/14 23:48:13 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:33:14 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	find_biggest_value(t_node **head, t_proc *proc)
 	t_node	*cur;
 
 	proc->aim = *head;
-	proc->i = 0;
-	proc->temp = 0;
+	proc->i = 1;
+	proc->temp = 1;
 	cur = *head;
 	while (cur != NULL)
 	{
@@ -89,7 +89,9 @@ void	find_next_big(t_node **head, t_proc *proc)
 
 	proc->i = 1;
 	proc->temp = 1;
-	proc->curaim = proc->aim->prev;
+	linked_list_circle(head);
+	proc->curaim = proc->aim->next;
+	linked_list_linear(head);
 	cur = *head;
 	while (cur != NULL)
 	{
@@ -101,6 +103,10 @@ void	find_next_big(t_node **head, t_proc *proc)
 		cur = cur->next;
 		proc->i++;
 	}
+	linked_list_circle(head);
+	if (proc->curaim == proc->aim->next)
+		find_lst(head, proc->curaim, proc);
+	linked_list_linear(head);
 }
 
 void	find_mini_value(t_node **head, t_proc *proc)
@@ -108,8 +114,8 @@ void	find_mini_value(t_node **head, t_proc *proc)
 	t_node	*cur;
 
 	proc->aim = *head;
-	proc->i = 0;
-	proc->temp = 0;
+	proc->i = 1;
+	proc->temp = 1;
 	cur = *head;
 	while (cur != NULL)
 	{
