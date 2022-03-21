@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:06:51 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/15 23:33:14 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:46:28 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	n_3_sort(t_node **head, int pmax)
 {
 	t_node	*cur;
 
-	while (check_sort(head) == 0)
+	while (check_sort(head) == 0 || pmax - (*head)->pos != 2)
 	{
 		linked_list_circle(head);
 		cur = *head;
@@ -107,6 +107,7 @@ void	find_next_big(t_node **head, t_proc *proc)
 	if (proc->curaim == proc->aim->next)
 		find_lst(head, proc->curaim, proc);
 	linked_list_linear(head);
+	check_next_big(head, proc);
 }
 
 void	find_mini_value(t_node **head, t_proc *proc)
@@ -117,6 +118,7 @@ void	find_mini_value(t_node **head, t_proc *proc)
 	proc->i = 1;
 	proc->temp = 1;
 	cur = *head;
+	linked_list_linear(head);
 	while (cur != NULL)
 	{
 		if (cur->pos < proc->aim->pos)

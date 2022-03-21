@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:52:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/15 23:33:14 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:47:59 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	find_next_mini(t_node **head, t_proc *proc)
 	if (proc->curaim == proc->aim->next)
 		find_lst(head, proc->curaim, proc);
 	linked_list_linear(head);
+	check_next_mini(head, proc);
 }
 
 void	find_lst(t_node **head, t_node *needle, t_proc *proc)
@@ -43,11 +44,29 @@ void	find_lst(t_node **head, t_node *needle, t_proc *proc)
 	t_node	*cur;
 
 	cur = *head;
-	proc->i = 0;
+	proc->i = 1;
 	while (cur != needle)
 	{
 		cur = cur->next;
 		proc->i++;
 	}
 	proc->temp = proc->i;
+}
+
+void	check_next_big(t_node **head, t_proc *proc)
+{
+	if (proc->curaim == proc->aim->next)
+	{
+		proc->aim = proc->curaim;
+		find_next_big(head, proc);
+	}
+}
+
+void	check_next_mini(t_node **head, t_proc *proc)
+{
+	if (proc->curaim == proc->aim->next)
+	{
+		proc->aim = proc->curaim;
+		find_next_mini(head, proc);
+	}
 }

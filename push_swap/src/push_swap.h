@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:56:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/15 23:33:13 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:47:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,9 @@ void		n_3_sort(t_node **head, int pmax);
 void		n_5_sort(t_node **a, t_node **b, int ymax);
 void		find_biggest_value(t_node **head, t_proc *proc);
 void		find_next_big(t_node **head, t_proc *proc);
+void		check_next_big(t_node **head, t_proc *proc);
 void		find_mini_value(t_node **head, t_proc *proc);
 void		find_next_mini(t_node **head, t_proc *proc);
+void		check_next_mini(t_node **head, t_proc *proc);
 
 #endif
