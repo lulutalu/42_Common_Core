@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 22:30:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/22 16:37:32 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:51:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		//////////////////////////////////////////////////
-		chunk = 10;
+		chunk = 60;
 		nchunk = 1;
 		nnode = dl.ymax;
 		while (ahead != NULL)
@@ -63,18 +63,16 @@ int	main(int argc, char **argv)
 				{
 					while (ahead->pos > nchunk * chunk || ahead->pos <= (nchunk - 1) * chunk)
 					{
-						if (nchunk * chunk < dl.ymax - chunk)
-						{
-							if (ahead->pos > dl.ymax - nchunk * (chunk / 2))
-							{
-								push_stack_b(&ahead, &bhead);
-								rotate_stack(&bhead, 'b');
-							}
-						}
 						if (ahead->next != NULL)
 							rotate_stack(&ahead, 'a');
 					}
-					push_stack_b(&ahead, &bhead);
+					if (ahead->pos > nchunk * chunk - chunk / 2)
+					{
+						push_stack_b(&ahead, &bhead);
+						rotate_stack(&bhead, 'b');
+					}
+					else
+						push_stack_b(&ahead, &bhead);
 					i++;
 				}
 			}
