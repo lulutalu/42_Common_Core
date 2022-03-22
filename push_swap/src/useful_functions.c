@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:32:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/21 15:59:51 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:59:07 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	invert_check_sort(t_node **head)
 	t_node	*cur;
 	t_proc	check;
 
+	linked_list_linear(head);
 	find_biggest_value(head, &check);
 	linked_list_circle(head);
 	cur = *head;

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:06:51 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/21 17:46:28 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:00:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	find_next_big(t_node **head, t_proc *proc)
 	if (proc->curaim == proc->aim->next)
 		find_lst(head, proc->curaim, proc);
 	linked_list_linear(head);
-	check_next_big(head, proc);
 }
 
 void	find_mini_value(t_node **head, t_proc *proc)
