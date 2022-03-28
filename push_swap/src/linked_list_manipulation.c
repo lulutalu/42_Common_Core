@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 22:30:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/21 18:30:28 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/28 13:39:25 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ void	linked_list_linear(t_node **head)
 		cur->next = NULL;
 		(*head)->prev = NULL;
 	}
+}
+
+void	lst_del(t_node **head, int status)
+{
+	t_node	*cur;
+
+	linked_list_linear(head);
+	while (*head != NULL)
+	{
+		cur = (*head)->next;
+		free(*head);
+		*head = cur;
+	}
+	if (status == 1)
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
 }

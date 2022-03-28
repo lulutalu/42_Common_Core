@@ -5,67 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 21:52:04 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/22 15:59:58 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/28 14:10:48 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/28 14:42:44 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_next_mini(t_node **head, t_proc *proc)
+void	chunk_size_selection(int nmax, t_chunk *chunk)
 {
-	t_node	*cur;
+	if (nmax <= 50)
+		chunk->size = 5;
+	else if (nmax <= 100)
+		chunk->size = 16;
+	else
+		chunk->size = nmax / 10;
+}
 
-	proc->i = 1;
-	proc->temp = 1;
-	linked_list_circle(head);
-	proc->curaim = proc->aim->next;
-	linked_list_linear(head);
-	cur = *head;
-	while (cur != NULL)
+void	push_to_b_1st_chunk(t_node **ahead, t_node **bhead, t_chunk *chunk)
+{
+	while (chunk->i <= chunk->size && (*ahead) != NULL)
 	{
-		if (cur->pos > proc->aim->pos && cur->pos < proc->curaim->pos)
+		while ((*ahead)->pos > chunk->n * chunk->size)
+			rotate_stack(ahead, 'a');
+		if ((*ahead)->pos > chunk->n * chunk->size - chunk->size / 2)
 		{
-			proc->curaim = cur;
-			proc->temp = proc->i;
+			push_stack_b(ahead, bhead);
+			if ((*bhead)->next != NULL)
+				rotate_stack(bhead, 'b');
 		}
-		proc->i++;
-		cur = cur->next;
-	}
-	linked_list_circle(head);
-	if (proc->curaim == proc->aim->next)
-		find_lst(head, proc->curaim, proc);
-	linked_list_linear(head);
-}
-
-void	find_lst(t_node **head, t_node *needle, t_proc *proc)
-{
-	t_node	*cur;
-
-	cur = *head;
-	proc->i = 1;
-	while (cur != needle)
-	{
-		cur = cur->next;
-		proc->i++;
-	}
-	proc->temp = proc->i;
-}
-
-void	check_next_big(t_node **head, t_proc *proc)
-{
-	if (proc->curaim == proc->aim->next)
-	{
-		proc->aim = proc->curaim;
-		find_next_big(head, proc);
+		else
+			push_stack_b(ahead, bhead);
+		chunk->nnode--;
+		chunk->i++;
 	}
 }
 
-void	check_next_mini(t_node **head, t_proc *proc)
+void	push_to_b_n_chunk(t_node **ahead, t_node **bhead, t_chunk *chunk)
 {
-	if (proc->curaim == proc->aim->next)
+	while (chunk->i <= chunk->size && (*ahead) != NULL)
 	{
-		proc->aim = proc->curaim;
-		find_next_mini(head, proc);
+		while ((*ahead)->pos > chunk->n * chunk->size || \
+				(*ahead)->pos <= (chunk->n - 1) * chunk->size)
+		{
+			if ((*ahead)->next != NULL)
+				rotate_stack(ahead, 'a');
+		}
+		if ((*ahead)->pos > chunk->n * chunk->size - chunk->size / 2)
+		{
+			push_stack_b(ahead, bhead);
+			rotate_stack(bhead, 'b');
+		}
+		else
+			push_stack_b(ahead, bhead);
+		chunk->nnode--;
+		chunk->i++;
+	}
+}
+
+void	push_to_b_last(t_node **ahead, t_node **bhead, t_chunk *chunk)
+{
+	while ((*ahead) != NULL)
+	{
+		if ((*ahead)->pos > chunk->n * chunk->size - chunk->size / 2)
+		{
+			push_stack_b(ahead, bhead);
+			rotate_stack(bhead, 'b');
+		}
+		else
+			push_stack_b(ahead, bhead);
+	}
+}
+
+void	sort_push(t_node **ahead, t_node **bhead, t_chunk *chunk, int nmax)
+{
+	t_info	b;
+
+	find_biggest_value(bhead, &b);
+	b.curaim = b.aim;
+	chunk->nnode = nmax;
+	while ((*bhead) != NULL)
+	{
+		if (b.temp <= chunk->nnode / 2)
+		{
+			while ((*bhead) != b.curaim)
+				rotate_stack(bhead, 'b');
+		}
+		else if (b.temp > chunk->nnode / 2)
+		{
+			while ((*bhead) != b.curaim)
+				reverse_rotate_stack(bhead, 'b');
+		}
+		b.aim = b.curaim;
+		find_next_big(bhead, &b);
+		push_stack_a(ahead, bhead);
+		chunk->nnode--;
 	}
 }

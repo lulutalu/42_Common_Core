@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:38:46 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/15 18:36:10 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:11:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_double	double_arg_2(char **argv)
 	dl.y = 0;
 	while (dl.y < dl.ymax)
 	{
+		limits_check(ft_atol(dl.split[dl.y]));
 		dl.tab[dl.y] = ft_atoi(dl.split[dl.y]);
 		free(dl.split[dl.y]);
 		dl.y++;

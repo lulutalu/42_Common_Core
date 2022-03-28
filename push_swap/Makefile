@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/14 21:58:35 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/28 14:13:26 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS_FILES	:= ${SRCS_FILES:.c=.o}
 OBJS		:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
 
 
-LIBFT		= ./libft
+LIBFT		= ./Libft
 MAKELIB		= ${MAKE} -C ${LIBFT}
 
 NAME		= push_swap
@@ -43,7 +43,7 @@ AR			= ar rcs
 MKDIR		= mkdir
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address
 
 
 all:		${NAME}
