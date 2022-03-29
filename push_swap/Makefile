@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/28 14:13:26 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/28 23:19:36 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ GREEN	= \033[1;32m
 RED 	= \033[1;31m
 ORANGE	= \033[1;33m
 GREY	= \033[1;90m
+BUILD	= \e[38;5;225m
 RESET	= \033[0m
 
 # COLORS
@@ -49,15 +50,17 @@ CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address
 all:		${NAME}
 
 ${NAME}:	${O_DIR} ${OBJS}
+			@printf "\e[1K\r${GREEN}💻 Successfully compiled ${NAME} .o's${RESET}\n"
 			@${MAKELIB}
 			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}/libft.a
-			@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)$(NAME) executable $(GREY)======================$(RESET)"
+			@printf "\e[1K\r${GREEN}💻 Successfully created ${NAME} executable${RESET}\n"
 
 ${O_DIR}:
-			${MKDIR} ${O_DIR}
+			@${MKDIR} ${O_DIR}
 
 ${O_DIR}%.o:${SRCS_DIR}%.c
-			${CC} ${CFLAGS} -I ./Libft/src/ -o $@ -c $<
+			@${CC} ${CFLAGS} -I ./Libft/src/ -o $@ -c $<
+			@printf "\e[1K\r${BUILD}🚧 $@ from $<${RESET}"
 
 clean :
 	@$(MAKE) -C Libft clean

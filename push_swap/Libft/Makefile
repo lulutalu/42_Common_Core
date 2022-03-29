@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/28 15:05:00 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/03/28 23:19:34 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ GREEN	= \033[1;32m
 RED 	= \033[1;31m
 ORANGE	= \033[1;33m
 GREY	= \033[1;90m
+BUILD	= \e[38;5;225m
 RESET	= \033[0m
 
 # COLORS
@@ -58,13 +59,14 @@ all :		${NAME}
 
 ${NAME} : 	${O_DIR} ${OBJS}
 			@${AR} ${NAME} ${OBJS}
-			@echo "$(GREY)====================$(GREEN) [Created] : $(RESET)libft.a $(GREY)===================================$(RESET)"
+			@printf "\e[1K\r${GREEN}💻 Successfully created ${NAME} library${RESET}\n"
 
 ${O_DIR}:
-			${MKDIR} ${O_DIR}
+			@${MKDIR} ${O_DIR}
 
 ${O_DIR}%.o:${SRCS_DIR}%.c
-			${CC} ${CFLAGS} -o $@ -c $<
+			@${CC} ${CFLAGS} -o $@ -c $<
+			@printf "\e[1K\r${BUILD}🚧 $@ from $<${RESET}"
 
 clean :
 	@rm -rf ${O_DIR}

@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 17:57:53 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/07 19:12:41 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/28 15:02:09 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/28 15:05:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+long	ft_atol(const char *str)
 {
-	t_list	*cell;
+	int		i;
+	long	res;
+	int		minus;
 
-	cell = malloc(sizeof(content));
-	if (! cell)
-		return (NULL);
-	cell->content = content;
-	cell->next = NULL;
-	return (cell);
+	minus = 1;
+	i = 0;
+	res = 0;
+	while ((str[i] > 8 && str[i] < 14) || str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+	{
+		minus = -1;
+		i++;
+	}
+	if (str[i] == '+' && minus == 1)
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (res * 10) + str[i] - '0';
+		i++;
+	}
+	return (res * minus);
 }
