@@ -6,14 +6,19 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:06:52 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 06:02:17 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/29 19:02:52 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+# endif
+
 # include "ft_printf.h"
+# include "get_next_line.h"
 # include "pipex.h"
 # include <stdarg.h>
 # include <limits.h>
@@ -48,5 +53,8 @@ int		ft_putchar_fd_count(char c, int fd);
 int		ft_putstr_fd_count(char *s, int fd);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

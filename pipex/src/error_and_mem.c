@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/24 22:19:41 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:09:53 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/03/29 04:57:11 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/03/29 19:25:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "./../includes/pipex.h"
 
-char	*ft_strdup(const char *s1)
+void	exit_error(char *error)
 {
-	char	*copy;
-	int		icopy;
-	int		istr;
+	if (ft_strncmp(error, "", 2) == 0)
+		perror("\e[1;91mError \e[0m");
+	else
+		ft_putstr_fd_count(error, 2);
+	exit(EXIT_FAILURE);
+}
 
-	if (s1 == NULL)
-		return (NULL);
-	icopy = 0;
-	istr = 0;
-	copy = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (! copy)
-		return (NULL);
-	while (s1[istr] != '\0')
-		copy[icopy++] = s1[istr++];
-	copy[icopy] = '\0';
-	return (copy);
+void	free_tab(void **mem)
+{
+	int	i;
+
+	i = 0;
+	while (mem[i] != NULL)
+		i++;
+	while (i > 0)
+		free(mem[i--]);
+	free(mem);
 }

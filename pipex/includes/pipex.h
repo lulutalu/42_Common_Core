@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 23:42:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 06:35:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:52:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include "pipex.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 /*
  * Authorized Function Library's
@@ -38,15 +39,57 @@
 */
 
 # define N_ARGS "\e[1;91mNumber of arguments incorrect\n\e[0m"
-# define FD_IN 0
-# define FD_OU 1
+# define FD_IN 1
+# define FD_OU 0
 
 /*
- * Functions
+ * Structures
+*/
+
+typedef struct s_pid
+{
+	pid_t	pid;
+	int		status;
+}				t_pid;
+
+typedef struct s_fd
+{
+	int		io[2];
+	int		input;
+	int		output;
+	int		outfile;
+}				t_fd;
+
+typedef struct s_pars
+{
+	char	**env;
+	int		i;
+	char	**split;
+	char	*cmd;
+	char	**arg;
+	char	*path;
+	char	**exec;
+	char	*temp;
+}				t_pars;
+
+/*
+ * Errors and Memory Functions
 */
 
 void	exit_error(char *error);
-void	input_file_permission(char *pathname);
-void	ouput_file_permission(char *pathname);
+void	free_tab(void **mem);
+
+/*
+ * Fork Functions
+*/
+
+void	first_child(t_fd *fd, t_pars *pars, char **envp);
+void	scnd_child(t_fd *fd, t_pars *pars, char **envp);
+
+/*
+ * Parsing Functions
+*/
+
+void	parsing_env(t_pars *pars, char **envp);
 
 #endif
