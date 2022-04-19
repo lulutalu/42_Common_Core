@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error_and_mem_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 04:57:11 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/04/04 17:20:43 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/04/04 17:20:23 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/04/14 16:17:43 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/pipex.h"
+#include "./../includes/pipex_bonus.h"
 
 void	exit_error(int status)
 {
 	if (status == 127)
 		ft_putstr_fd_count("command not found\n", 2);
+	else
+		perror(NULL);
 	exit(status);
 }
 
@@ -34,14 +36,12 @@ void	free_tab(void **mem)
 void	check_for_error(int value)
 {
 	if (value < 0)
-		exit_error(0);
+		exit(0);
 }
 
-void	number_arg_check(int argc)
+void	free_here_doc(t_doc *doc)
 {
-	if (argc != 5)
-	{
-		ft_putstr_fd_count(N_ARGS, 2);
-		exit_error(1);
-	}
+	free(doc->limiter);
+	free(doc->here_doc);
+	free(doc->buf);
 }

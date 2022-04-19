@@ -6,7 +6,7 @@
 #    By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/03/28 18:57:29 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/04/12 17:14:59 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRCS_FILES 	= core_process.c ft_atoi.c ft_atol.c ft_bzero.c ft_calloc.c \
 			  if_forest.c pointer_address_process.c string_process.c \
 			  struct_init.c variable_counter.c ft_isalpha.c ft_lstadd_front.c \
 			  ft_lstsize.c ft_printf.c ft_putstr_fd.c ft_strlcat.c \
-			  ft_strtrim.c hexa_process.c \
+			  ft_strtrim.c hexa_process.c ft_dyn_strjoin.c \
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

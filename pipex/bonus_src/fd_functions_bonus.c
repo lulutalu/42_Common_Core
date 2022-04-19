@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variable_counter.c                                 :+:      :+:    :+:   */
+/*   fd_functions_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 16:04:13 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:10:57 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/04/04 17:21:08 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/04/11 23:29:57 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../includes/pipex_bonus.h"
 
-void	variable_counter(t_printf *ptr, const char *input)
-{	
-	while (input[ptr->i])
-	{
-		if (input[ptr->i] == '%')
-		{
-			ptr->iparam = 0;
-			while (ptr->param[ptr->iparam])
-			{
-				if (input[ptr->i + 1] == ptr->param[ptr->iparam])
-				{
-					ptr->nbvar++;
-					ptr->i++;
-					break ;
-				}
-				ptr->iparam++;
-			}
-		}
-		ptr->i++;
-	}
+void	end_fd_close(t_fd *fd)
+{
+	close(fd->input);
+	close(fd->infile);
+	close(fd->output);
+	close(fd->outfile);
+	close(fd->io[FD_IN]);
+	close(fd->io[FD_OU]);
+	close(fd->new_io[FD_IN]);
+	close(fd->new_io[FD_OU]);
+}
+
+void	pipe_close(int fd1, int fd2)
+{
+	close(fd1);
+	close(fd2);
 }

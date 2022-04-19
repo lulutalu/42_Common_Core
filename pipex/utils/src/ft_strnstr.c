@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 15:43:05 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 16:47:30 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:20:41 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

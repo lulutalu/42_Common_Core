@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:39:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:09:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:21:08 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
 int	ft_putstr_fd_count(char *s, int fd)
 {

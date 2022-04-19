@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 16:40:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/04/04 18:32:03 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/04/04 17:21:36 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/04/11 20:13:49 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/pipex.h"
+#include "./../includes/pipex_bonus.h"
 
 /* While loop trying to find the correct way to execute process */
 int	parsing_env(t_pars *pars, char **envp)

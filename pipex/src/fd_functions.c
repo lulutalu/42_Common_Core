@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pointer_address_process.c                          :+:      :+:    :+:   */
+/*   fd_functions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 16:38:41 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:10:29 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/04/04 12:34:03 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/04/04 17:21:27 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../includes/pipex.h"
 
-void	pointer_address_process(t_printf *ptr)
+void	start_fd_open(t_fd *fd, char *in, char *out)
 {
-	char	*base;
+	fd->input = open(in, O_RDONLY);
+	fd->outfile = open(out, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd->outfile < 0 || fd->input < 0)
+		ft_putstr_fd_count("No such file or directory\n", 2);
+}
 
-	base = "0123456789abcdef";
-	ptr->count += ft_putstr_fd_count("0x", 1);
-	ft_itoa_base(&ptr->str, (unsigned long)va_arg(ptr->arg, void *), base);
-	ptr->count += ft_putstr_fd_count(ptr->str, 1);
-	free(ptr->str);
+void	end_fd_close(t_fd *fd)
+{
+	close(fd->input);
+	close(fd->output);
+	close(fd->outfile);
+	close(fd->io[FD_IN]);
+	close(fd->io[FD_OU]);
 }

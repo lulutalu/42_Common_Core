@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:58:08 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 16:54:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:20:33 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # include "get_next_line.h"
-# include "pipex.h"
-# include "ft_printf.h"
+# include "utils.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_process.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 17:03:00 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:08:28 by lduboulo         ###   ########.fr       */
+/*   Created: 2021/10/17 17:16:05 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/04/04 11:21:01 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
-void	core_process(t_printf *ptr, const char *input)
+char	*ft_strchr(const char *s, int c)
 {
-	while (ptr->nbvar > 0)
-	{
-		if (input[ptr->i] == '%')
-		{
-			if_forest(input, ptr);
-			ptr->i += 2;
-			ptr->nbvar--;
-			if (ptr->nbvar == 0)
-				break ;
-		}
-		else
-		{
-			ptr->count += ft_putchar_fd_count(input[ptr->i], 1);
-			ptr->i++;
-		}
-	}
+	int	i;
+
+	i = 0;
+	while (s[i] != (char)c && s[i] != '\0')
+		i++;
+	if (s[i] == (char)c)
+		return ((char *) s + i);
+	else
+		return (NULL);
 }
+
+/*int	main()
+{
+	char s[] = "tripouille";
+
+	printf("Value Fonction C = %s\n", strchr(s, 't' + 256));
+	printf("Value Fonction Mano = %s\n", ft_strchr(s, 't' + 256));
+}*/

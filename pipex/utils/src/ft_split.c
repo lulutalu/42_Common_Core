@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 18:22:13 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 16:56:08 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:21:04 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
 int	wordnumber(char const *s, char c)
 {

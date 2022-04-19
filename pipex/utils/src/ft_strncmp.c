@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 18:07:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 06:03:38 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:20:48 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

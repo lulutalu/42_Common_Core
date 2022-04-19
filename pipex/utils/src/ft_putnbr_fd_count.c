@@ -6,11 +6,11 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:14:36 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/03/29 01:09:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:21:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../../includes/utils.h"
 
 void	ft_putnbr_fd_count(long n, int fd, int *count)
 {
