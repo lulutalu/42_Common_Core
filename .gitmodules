@@ -4,3 +4,15 @@
 [submodule "42_fdf"]
 	path = 42_fdf
 	url = git@github.com:lulutalu/42_fdf.git
+[submodule "42_printf"]
+	path = 42_printf
+	url = git@github.com:lulutalu/42_printf.git
+[submodule "42_Get_Next_Line"]
+	path = 42_Get_Next_Line
+	url = git@github.com:lulutalu/42_Get_Next_Line.git
+[submodule "42_push_swap"]
+	path = 42_push_swap
+	url = git@github.com:lulutalu/42_push_swap.git
+[submodule "42_pipex"]
+	path = 42_pipex
+	url = git@github.com:lulutalu/42_pipex.git
