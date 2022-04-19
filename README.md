@@ -1,17 +1,16 @@
-[![jaeskim's 42 stats](https://badge42.herokuapp.com/api/stats/lduboulo?cursus=C%20Piscine&darmode=true&privacyEmail=true)](https://github.com/JaeSeoKim/badge42)
-
-Résultat Piscine
-
-[![jaeskim's 42 stats](https://badge42.herokuapp.com/api/stats/lduboulo?privacyEmail=true&darkmode=true)](https://github.com/JaeSeoKim/badge42)
-
-Cursus
-
-Projet Fini
-
-Libft  [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/Libft)](https://github.com/JaeSeoKim/badge42)
-
-Born2beroot [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/Born2beroot)](https://github.com/JaeSeoKim/badge42)
-
-Get_next_line [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/get_next_line)](https://github.com/JaeSeoKim/badge42)
-
-Ft_Printf [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/lduboulo/ft_printf)](https://github.com/JaeSeoKim/badge42)
+<p align="center">
+  <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl2668aqb008909jp0ecnecpa/stats?cursusId=21&coalitionId=192" alt="lduboulo's 42 stats" /></a>
+</p>
+<p align="center">
+  <strong>Stat 42 Cursus</strong>   
+  
+  ------------------------------------------------------------------------------   
+</p>
+<p align="center">
+ <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl2668aqb008909jp0ecnecpa/stats?cursusId=9&coalitionId=piscine" alt="lduboulo's 42 stats" /></a>
+</p>
+<p align="center">
+  <strong>Stat 42 Piscine Juillet 2021</strong>   
+  
+  ------------------------------------------------------------------------------   
+</p>
