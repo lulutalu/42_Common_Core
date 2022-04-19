@@ -1,3 +1,6 @@
 [submodule "42_Libft"]
 	path = 42_Libft
 	url = git@github.com:lulutalu/42_Libft.git
+[submodule "42_fdf"]
+	path = 42_fdf
+	url = git@github.com:lulutalu/42_fdf.git
