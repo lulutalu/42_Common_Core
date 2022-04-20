@@ -16,3 +16,6 @@
 [submodule "42_pipex"]
 	path = 42_pipex
 	url = git@github.com:lulutalu/42_pipex.git
+[submodule "42_philosophers"]
+	path = 42_philosophers
+	url = git@github.com:lulutalu/42_philosophers.git
