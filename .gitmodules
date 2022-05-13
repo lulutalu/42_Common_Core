@@ -19,6 +19,3 @@
 [submodule "42_philosophers"]
 	path = 42_philosophers
 	url = git@github.com:lulutalu/42_philosophers.git
-[submodule "42_Minishell"]
-	path = 42_Minishell
-	url = git@github.com:lulutalu/42_Minishell.git
