@@ -22,3 +22,6 @@
 [submodule "42_Minishell"]
 	path = 42_Minishell
 	url = git@github.com:lulutalu/42_Minishell.git
+[submodule "42_NetPractice"]
+	path = 42_NetPractice
+	url = git@github.com:lulutalu/42_NetPractice.git
