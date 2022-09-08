@@ -25,3 +25,6 @@
 [submodule "42_NetPractice"]
 	path = 42_NetPractice
 	url = git@github.com:lulutalu/42_NetPractice.git
+[submodule "42_CPP_Modules"]
+	path = 42_CPP_Modules
+	url = git@github.com:lulutalu/42_CPP_Modules.git
