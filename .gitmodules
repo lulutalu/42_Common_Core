@@ -28,3 +28,6 @@
 [submodule "42_CPP_Modules"]
 	path = 42_CPP_Modules
 	url = git@github.com:lulutalu/42_CPP_Modules.git
+[submodule "42_MiniRT"]
+	path = 42_MiniRT
+	url = git@github.com:lulutalu/42_MiniRT.git
