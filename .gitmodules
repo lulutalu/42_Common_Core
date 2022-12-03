@@ -31,3 +31,6 @@
 [submodule "42_MiniRT"]
 	path = 42_MiniRT
 	url = git@github.com:lulutalu/42_MiniRT.git
+[submodule "42_ft_containers"]
+	path = 42_ft_containers
+	url = git@github.com:lulutalu/42_ft_containers.git
